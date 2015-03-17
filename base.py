@@ -1,56 +1,65 @@
 #-*- encoding: utf-8 -*-
-import hashlib,json,httplib
+import json,httplib
 import urlparse
 import urllib
-import requests
 
 import utils
 import exceptions
 
 class HTTPClient(object):
-    USER_AGENT = 'python-ucloudclient'
+
+    def __init__(self, base_url):
+        self.base_url = base_url
+        o = urlparse.urlsplit(base_url)
+        if o.scheme == 'https':
+            self.conn = httplib.HTTPSConnection(o.netloc);
+        else:
+            self.conn = httplib.HTTPConnection(o.netloc);
+
+    def __del__(self):
+        self.conn.close();
 
 
-    def request(self, url, method, **kwargs):
-            kwargs.setdefault('headers', kwargs.get('headers', {}))
-            kwargs['headers']['User-Agent'] = self.USER_AGENT
-            kwargs['headers']['Accept'] = 'application/json'
-            if 'body' in kwargs:
-                kwargs['headers']['Content-Type'] = 'application/json'
-                kwargs['data'] = json.dumps(kwargs['body'])
-                del kwargs['body']
+    def get(self, resouse, params):
+        resouse += "?" + urllib.urlencode(params)
+        print("%s%s" % (self.base_url, resouse))
+        self.conn.request("GET", resouse);
+        respones_raw=self.conn.getresponse().read()
+        response = json.loads(respones_raw);
+        return response;
 
-            resp = requests.request(
-                method,
-                url,
-                **kwargs)
 
-            if resp.text:
-                if resp.status_code == 400:
-                    if ('Connection refused' in resp.text or
-                            'actively refused' in resp.text):
-                        raise exceptions.ConnectionRefused(resp.text)
-                try:
-                    body = json.loads(resp.text)
-                except ValueError:
-                    body = None
-            else:
-                body = None
+class Manager(object):
+    def __init__(self,api):
+        self.api=api
 
-            if resp.status_code >= 400:
-                raise exceptions.from_response(resp, body, url, method)
+    def _get(self, body):
+        body['PublicKey']=self.api.public_key
+        token=utils.get_token(self.api.private_key,body)
+        body['Signature']=token
+        return self.api.client.get('/',body)
 
-            return resp, body
 
-    def get(self, url, **kwargs):
-        return self.request(url, 'GET', **kwargs)
+class APIResourceWrapper(object):
+    """ wrapper for api objects. """
+    _attrs = []
+    _apiresource = None
 
-    def post(self, url, **kwargs):
-        return self.request(url, 'POST', **kwargs)
+    def __init__(self, apiresource):
+        self._apiresource = apiresource
 
-    def put(self, url, **kwargs):
-        return self.request(url, 'PUT', **kwargs)
+    def __getattribute__(self, attr):
+        try:
+            return object.__getattribute__(self, attr)
+        except AttributeError:
+            if attr not in self._attrs:
+                raise
+            # __getattr__ won't find properties
+            return getattr(self._apiresource, attr)
 
-    def delete(self, url, **kwargs):
-        return self.request(url, 'DELETE', **kwargs)
+    def __repr__(self):
+        return "<%s: %s>" % (self.__class__.__name__,
+                             dict((attr, getattr(self, attr))
+                                  for attr in self._attrs
+                                  if hasattr(self, attr)))
 

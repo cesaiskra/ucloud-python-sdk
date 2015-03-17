@@ -29,6 +29,7 @@ def get_token(private_key, params):
     for key, value in items:
         params_data = params_data + str(key) + str(value)
     params_data = params_data + private_key
+    print params_data
 
     sign = hashlib.sha1()
     sign.update(params_data)

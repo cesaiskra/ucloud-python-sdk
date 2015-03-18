@@ -19,6 +19,8 @@ class Client(object):
 
         self.uhost=uhost.UhostManager(self)
         self.unet=unet.UnetManager(self)
+        self.umon=umon.UnetManager(self)
+
         self.client=base.HTTPClient(base_url)
 
 if __name__=='__main__':
@@ -28,8 +30,14 @@ if __name__=='__main__':
     region='cn-north-03'
     c=Client(base_url,public_key,private_key)
     image_id='uimage-3gzxij'
-    print(c.uhost.get(region))
-    print(c.uhost.get_price(region,image_id,2,2048,1,'Month'))
+    #print(c.uhost.get_price(region,image_id,2,2048,1,'Month'))
+    Parameters={
+            "time_range":"2592000",
+            "metric_names":["BandOut"],
+            "resource_type":"sharebandwidth",
+            "resourceid":"",
+            }
+    print(c.umon.metric_get(region,**Parameters))
 
 
 

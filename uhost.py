@@ -249,7 +249,7 @@ class UhostManager(base.Manager):
         '''
         body={}
         body['Region']=region
-        body['Action']='GetUhostInstancePrice'
+        body['Action']='GetUHostInstancePrice'
         body['ImageId']=imageid
         body['CPU']=cpu
         body['Memory']=memory

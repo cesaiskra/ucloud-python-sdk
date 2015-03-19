@@ -4,7 +4,7 @@ import urlparse
 import urllib
 
 import utils
-import exceptions
+import uexceptions
 
 class HTTPClient(object):
 
@@ -17,16 +17,31 @@ class HTTPClient(object):
             self.conn = httplib.HTTPConnection(o.netloc);
 
     def __del__(self):
-        self.conn.close();
+        self.conn.close()
 
 
     def get(self, resouse, params):
         resouse += "?" + urllib.urlencode(params)
         print("%s%s" % (self.base_url, resouse))
-        self.conn.request("GET", resouse);
+        response=None
+
+        try:
+            self.conn.request("GET", resouse)
+
+        except Exception as e:
+            raise uexceptions.ConnectionRefused(e)
+
         respones_raw=self.conn.getresponse().read()
-        response = json.loads(respones_raw);
-        return response;
+
+        try:
+            response = json.loads(respones_raw)
+
+        except Exception as e:
+            raise uexceptions.NoJsonFound(e)
+
+        if response.get('RetCode')!=0:
+            raise uexceptions.BadParameters('bad parameters:%s'%params)
+        return response
 
 
 class Manager(object):

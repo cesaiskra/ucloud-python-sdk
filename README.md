@@ -1,4 +1,5 @@
-this is a python sdk for ucloud
+this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash
+env.
 
 usage:
 

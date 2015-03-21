@@ -40,7 +40,7 @@ class HTTPClient(object):
             raise uexceptions.NoJsonFound(e)
 
         if response.get('RetCode')!=0:
-            raise uexceptions.BadParameters('bad parameters:%s'%params)
+            raise uexceptions.BadParameters("message: %s /n bad parameters:%s"%(response.get('Message'),params))
         return response
 
 

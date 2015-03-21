@@ -32,6 +32,38 @@ def arg(*args, **kwargs):
         return func
     return _decorator
 
+
+def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
+    pt = prettytable.PrettyTable([dict_property, dict_value], caching=False)
+    pt.align = 'l'
+    for k, v in sorted(d.items()):
+        # convert dict to str to check length
+        if isinstance(v, (dict, list)):
+            v = jsonutils.dumps(v)
+        if wrap > 0:
+            v = textwrap.fill(str(v), wrap)
+        # if value has a newline, add in multiple rows
+        # e.g. fault with stacktrace
+        if v and isinstance(v, six.string_types) and r'\n' in v:
+            lines = v.strip().split(r'\n')
+            col1 = k
+            for line in lines:
+                pt.add_row([col1, line])
+                col1 = ''
+        else:
+            if v is None:
+                v = '-'
+            pt.add_row([k, v])
+
+    #result = encodeutils.safe_encode(pt.get_string())
+    result = pt.get_string()
+
+    if six.PY3:
+        result = result.decode()
+
+    print(result)
+
+
 def print_list(objs, fields, formatters={}, sortby_index=None):
     if sortby_index is None:
         sortby = None
@@ -49,9 +81,10 @@ def print_list(objs, fields, formatters={}, sortby_index=None):
             else:
                 if field in mixed_case_fields:
                     field_name = field.replace(' ', '_')
-                else:
-                    field_name = field.lower().replace(' ', '_')
-                data = getattr(o, field_name, '')
+                # else:
+                #     field_name = field.lower().replace(' ', '_')
+                field_name=field
+                data = o.get(field_name, '')
                 if data is None:
                     data = '-'
                 row.append(data)
@@ -65,7 +98,7 @@ def print_list(objs, fields, formatters={}, sortby_index=None):
     if six.PY3:
         result = result.decode()
 
-    print(result
+    print(result)
 
 def env(*args, **kwargs):
     """Returns environment variable set."""

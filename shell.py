@@ -1,3 +1,8 @@
+'''
+Command line interface for ucloud
+'''
+from __future__ import print_function
+
 import sys
 import os
 import logging
@@ -78,10 +83,10 @@ class UcloudShell(object):
         :param parser:
         :return:
         '''
-        parser.set_defaults(ucloud_region=os.env.get('UCLOUD_REGION'))
-        parser.set_defaults(ucloud_url=os.env.get('UCLOUD_URL'))
-        parser.set_defaults(ucloud_pubkey=os.env.get('UCLOUD_PUBKEY'))
-        parser.set_defaults(ucloud_prikey=os.env.get('UCLOUD_PRIKEY'))
+        parser.set_defaults(ucloud_region=os.environ.get('UCLOUD_REGION'))
+        parser.set_defaults(ucloud_url=os.environ.get('UCLOUD_URL'))
+        parser.set_defaults(ucloud_pubkey=os.environ.get('UCLOUD_PUBKEY'))
+        parser.set_defaults(ucloud_prikey=os.environ.get('UCLOUD_PRIKEY'))
 
 
     def get_base_parser(self):
@@ -219,7 +224,7 @@ class UcloudShell(object):
         subparser.set_defaults(func=self.do_bash_completion)
 
 
-    def get_subcommand_parser(self, version):
+    def get_subcommand_parser(self):
         parser = self.get_base_parser()
 
         self.subcommands = {}
@@ -243,10 +248,9 @@ class UcloudShell(object):
         '''
         parser = self.get_base_parser()
         (options, args) = parser.parse_known_args(argv)
-        self.setup_debugging(options.degub)
+        self.setup_debugging(options.debug)
 
-        subcommand_parser = self.get_subcommand_parser(
-            options.os_compute_api_version)
+        subcommand_parser = self.get_subcommand_parser()
         self.parser = subcommand_parser
 
         if options.help or not argv:
@@ -271,8 +275,8 @@ class UcloudShell(object):
 
         args.func(self.cs, args)
 
-        if args.timings:
-            self._dump_timings(self.times + self.cs.get_timings())---
+        # if args.timings:
+        #     self._dump_timings(self.times + self.cs.get_timings())---
 
     def _dump_timings(self, timings):
         class Tyme(object):
@@ -291,6 +295,7 @@ class UcloudShell(object):
 
 
 def main():
+
     try:
         #argv = [encodeutils.safe_decode(a) for a in sys.argv[1:]]
         argv=[a for a in sys.argv[1:]]
@@ -300,7 +305,7 @@ def main():
         logger.debug(e, exc_info=1)
         details = {'name': e.__class__.__name__,
                    'msg': type(e)}
-        print("ERROR (%(name)s): %(msg)s" % details, sys.stderr)
+        print("ERROR (%(name)s): %(msg)s" % details, file=sys.stderr)
         '''
         details = {'name': encodeutils.safe_encode(e.__class__.__name__),
                    'msg': encodeutils.safe_encode(six.text_type(e))}
@@ -309,7 +314,7 @@ def main():
               '''
         sys.exit(1)
     except KeyboardInterrupt as e:
-        print("... terminating nova client", sys.stderr)
+        print("... terminating nova client", file=sys.stderr)
         sys.exit(130)
 
 

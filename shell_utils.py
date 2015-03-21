@@ -1,6 +1,9 @@
 import os
 import six
 import prettytable
+import textwrap
+import json
+
 
 
 
@@ -39,7 +42,8 @@ def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
     for k, v in sorted(d.items()):
         # convert dict to str to check length
         if isinstance(v, (dict, list)):
-            v = jsonutils.dumps(v)
+            #v = jsonutils.dumps(v)
+            v = json.dumps(v)
         if wrap > 0:
             v = textwrap.fill(str(v), wrap)
         # if value has a newline, add in multiple rows

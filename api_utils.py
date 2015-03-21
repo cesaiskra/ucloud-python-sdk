@@ -1,4 +1,4 @@
-#-*- encoding:utf-8 -*-
+#-*- coding:utf-8 -*-
 import hashlib
 
 
@@ -21,9 +21,7 @@ region="us-west-01"
 
 def get_token(private_key, params):
     items=params.items()
-    # 请求参数串
     items.sort()
-    # 将参数串排序
 
     params_data = "";
     for key, value in items:
@@ -35,7 +33,3 @@ def get_token(private_key, params):
     signature = sign.hexdigest()
 
     return signature
-    # 生成的Signature值
-
-if __name__=='__main__':
-    print get_token('',{})

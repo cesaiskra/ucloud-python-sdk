@@ -3,7 +3,7 @@ import json,httplib
 import urlparse
 import urllib
 
-import utils
+import api_utils
 import uexceptions
 
 class HTTPClient(object):
@@ -50,31 +50,6 @@ class Manager(object):
 
     def _get(self, body):
         body['PublicKey']=self.api.public_key
-        token=utils.get_token(self.api.private_key,body)
+        token=api_utils.get_token(self.api.private_key,body)
         body['Signature']=token
         return self.api.client.get('/',body)
-
-
-class APIResourceWrapper(object):
-    """ wrapper for api objects. """
-    _attrs = []
-    _apiresource = None
-
-    def __init__(self, apiresource):
-        self._apiresource = apiresource
-
-    def __getattribute__(self, attr):
-        try:
-            return object.__getattribute__(self, attr)
-        except AttributeError:
-            if attr not in self._attrs:
-                raise
-            # __getattr__ won't find properties
-            return getattr(self._apiresource, attr)
-
-    def __repr__(self):
-        return "<%s: %s>" % (self.__class__.__name__,
-                             dict((attr, getattr(self, attr))
-                                  for attr in self._attrs
-                                  if hasattr(self, attr)))
-

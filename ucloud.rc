@@ -1,0 +1,6 @@
+#export UCLOUD_REGION="cn-north-03"
+export UCLOUD_REGION="us-west-01"
+export UCLOUD_URL="https://api.ucloud.cn"
+export UCLOUD_PUBKEY="asdf"
+export UCLOUD_PRIKEY="asdf"
+

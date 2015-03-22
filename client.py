@@ -25,8 +25,8 @@ class Client(object):
 
 
 if __name__=='__main__':
-    public_key='ucloud344736086@qq.com1384962117261566439'
-    private_key='302fb5e1dc497482450fbb0fbf1ed3bc90fd926c'
+    public_key='asdf'
+    private_key='asdf'
     base_url='https://api.ucloud.cn'
 
     region='cn-north-03'

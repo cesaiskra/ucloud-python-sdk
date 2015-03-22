@@ -1,9 +1,8 @@
 #-*- coding:utf-8 -*-
 import hashlib
+import time
 
 
-public_key="ucloud344736086@qq.com1384962117261566439"
-private_key="302fb5e1dc497482450fbb0fbf1ed3bc90fd926c"
 region="cn-north-03"
 region="cn-east-01"
 region="hk-01"
@@ -33,3 +32,9 @@ def get_token(private_key, params):
     signature = sign.hexdigest()
 
     return signature
+
+
+def get_formate_time(now):
+    if now:
+        return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(now))
+    return ''

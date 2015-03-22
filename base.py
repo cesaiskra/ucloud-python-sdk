@@ -35,11 +35,13 @@ class HTTPClient(object):
 
         try:
             response = json.loads(respones_raw)
+            print(response)
 
         except Exception as e:
             raise uexceptions.NoJsonFound(e)
 
         if response.get('RetCode')!=0:
+            print('Message:%(Message)s\nRetCode:%(RetCode)s'%response)
             raise uexceptions.BadParameters("message: %s /n bad parameters:%s"%(response.get('Message'),params))
         return response
 

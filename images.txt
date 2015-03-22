@@ -1,5 +1,4 @@
 __author__ = 'hyphen'
-https://api.ucloud.cn/?Action=DescribeImage&PublicKey=ucloud344736086%40qq.com1384962117261566439&Region=cn-north-03&Signature=aa54f72305e5672959c483da35b487e9b68b0d29
 {u'ImageDescription': u' Community ENTerprise Operating System 6.2 64-bit', u'OsName': u'CentOS 6.2s 64\u4f4d', u'ImageId': u'0163c0c5-7481-4319-9c', u'State': u'Available', u'ImageName': u'CentOS 6.2 64\u4f4d', u'OsType': u'Linux', u'CreateTime': 1406439273, u'ImageType': u'Base'}
 {u'ImageDescription': u'Community ENTerprise Operating System 5.2 64-bit', u'OsName': u'CentOS 5.2 64\u4f4d', u'ImageId': u'0c05fb5a1dfde7912344c5545b8c74bc', u'State': u'Available', u'ImageName': u'CentOS 5.2 64\u4f4d', u'OsType': u'Linux', u'CreateTime': 1394435285, u'ImageType': u'Base'}
 {u'ImageDescription': u'Ubuntu Server 10.04 LTS 32-bit', u'OsName': u'Ubuntu 10.04 32\u4f4d', u'ImageId': u'11f0dbdeca350a066cb1d0d760782f43', u'State': u'Available', u'ImageName': u'Ubuntu 10.04 32\u4f4d', u'OsType': u'Linux', u'CreateTime': 1394436229, u'ImageType': u'Base'}

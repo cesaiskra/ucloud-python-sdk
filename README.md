@@ -70,7 +70,7 @@ env.
         | uimage-4dqokn                    | Windows 2008 64位 EN            |
         | uimage-5yt2b0                    | CentOS 7.0 64位                 |
         | uimage-aapsg0                    | CentOS 6.4 32位                 |
-        | uimage-auslq4                    | Ubuntu12.04 64位 UDDP专用镜像   |
+        | uimage-auslq4                    | Ubuntu12.04 64位 UDDP专用镜像    |
         | uimage-d04q4f                    | RHEL 5.9 64位                   |
         | uimage-dovhra                    | SLES 10 32位                    |
         | uimage-eezagu                    | RHEL 6.3 64位                   |
@@ -87,12 +87,12 @@ env.
         | uimage-qiut5g                    | CentOS 6.5 64位                 |
         | uimage-qlo15u                    | Gentoo 2.2 64位                 |
         | uimage-qt4b4s                    | Windows 2008 32位               |
-        | uimage-rsy4nb                    | Debian7.0 64位 UDDP专用镜像     |
-        | uimage-t2qre5                    |  CentOS6.3（64位）+Ecshop企业版 |
+        | uimage-rsy4nb                    | Debian7.0 64位 UDDP专用镜像      |
+        | uimage-t2qre5                    |  CentOS6.3（64位）+Ecshop企业版  |
         | uimage-vupx2p                    | RHEL 6.2 32位                   |
         | uimage-xgilfh                    | Debian 6.0 32位                 |
         | uimage-yq3cgy                    | RHEL 5.7 32位                   |
-        | uimage-zclgng                    | CentOS6.5 64位 UDDP专用镜像     |
+        | uimage-zclgng                    | CentOS6.5 64位 UDDP专用镜像      |
         | uimage-zehxpd                    | Debian 6.0 64位                 |
         | uimage-zkezxp                    | RHEL 5.7 64位                   |
         +----------------------------------+---------------------------------+

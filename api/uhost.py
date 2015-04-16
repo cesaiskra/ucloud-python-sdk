@@ -1,4 +1,5 @@
-import base
+from utils import base
+
 
 class UhostManager(base.Manager):
     '''

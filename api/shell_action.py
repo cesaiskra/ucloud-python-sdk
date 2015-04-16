@@ -1,8 +1,8 @@
 import logging
 import argparse
 
-import shell_utils
-import api_utils
+from utils import shell_utils
+from utils import api_utils
 
 
 logger = logging.getLogger(__name__)
@@ -40,9 +40,9 @@ def _print_host(d):
     disk_set=d.pop('DiskSet')
     ip_set=d.pop('IPSet')
     if d.get('ExpireTime'):
-        d['ExpireTime']=api_utils.get_formate_time(d['ExpireTime'])
+        d['ExpireTime']= api_utils.get_formate_time(d['ExpireTime'])
     if d.get('CreateTime'):
-        d['CreateTime']=api_utils.get_formate_time(d['CreateTime'])
+        d['CreateTime']= api_utils.get_formate_time(d['CreateTime'])
 
     for i in range(len(disk_set)):
         disk=disk_set[i]

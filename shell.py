@@ -8,10 +8,11 @@ import os
 import logging
 import argparse
 
-import shell_utils
+from api import shell_action
+
 import uexceptions
-import shell_action
 import client
+from utils import shell_utils
 
 
 logger = logging.getLogger(__name__)
@@ -271,12 +272,12 @@ class UcloudShell(object):
         ucloud_pubkey=args.ucloud_pubkey
         ucloud_prikey=args.ucloud_prikey
 
-        self.cs=client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey)
+        self.cs=client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,timming=args.timings)
 
         args.func(self.cs, args)
 
-        # if args.timings:
-        #     self._dump_timings(self.times + self.cs.get_timings())---
+        if args.timings:
+            self._dump_timings(self.times + self.cs.get_timings())
 
     def _dump_timings(self, timings):
         class Tyme(object):

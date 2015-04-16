@@ -25,7 +25,7 @@ class UnetManager(base.Manager):
         body['ResourceType']=resource_type
         if metric_names:
             for i in range(len(metric_names)):
-                body['Rule.'+str(i)]=metric_names[i]
+                body['MetricName.'+str(i)]=metric_names[i]
         if time_range:
             body['TimeRange']=time_range
         if begin_time:

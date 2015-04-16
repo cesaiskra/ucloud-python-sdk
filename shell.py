@@ -1,18 +1,20 @@
+#!/usr/bin/python
 '''
 Command line interface for ucloud
 '''
 from __future__ import print_function
-
-import sys
-import os
-import logging
 import argparse
+import logging
+import os
+import sys
+
+import six
 
 from api import shell_action
-
-import uexceptions
-import client
+from utils import encodeutils
 from utils import shell_utils
+import client
+import uexceptions
 
 
 logger = logging.getLogger(__name__)
@@ -93,7 +95,7 @@ class UcloudShell(object):
     def get_base_parser(self):
         '''
         get cli parser
-        :return:
+        :return:parser
         '''
         parser = UcloudClientArgumentParser(
             prog='ucloud',
@@ -298,14 +300,13 @@ class UcloudShell(object):
 def main():
 
     try:
-        #argv = [encodeutils.safe_decode(a) for a in sys.argv[1:]]
         argv=[a for a in sys.argv[1:]]
         UcloudShell().main(argv)
 
     except Exception as e:
         logger.debug(e, exc_info=1)
-        details = {'name': e.__class__.__name__,
-                   'msg': type(e)}
+        details = {'name': encodeutils.safe_encode(e.__class__.__name__),
+                   'msg': six.text_type(e)}
         print("ERROR (%(name)s): %(msg)s" % details, file=sys.stderr)
         '''
         details = {'name': encodeutils.safe_encode(e.__class__.__name__),

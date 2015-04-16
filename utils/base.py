@@ -42,8 +42,8 @@ class HTTPClient(object):
             if self.timming:
                 start_time = time.time()
             self.conn.request("GET", resouse)
-            if self.timings:
-                self.times.append(("%s %s" % ('GET', resouse),
+            if self.timming:
+                self.time.append(("%s %s" % ('GET', resouse),
                                start_time, time.time()))
 
         except Exception as e:

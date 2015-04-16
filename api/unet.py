@@ -1,5 +1,5 @@
 from utils import base
-
+import uexceptions
 
 class UnetManager(base.Manager):
     '''
@@ -31,7 +31,7 @@ class UnetManager(base.Manager):
 
     def eip_get(self,region,eipids=None,offset=None,limit=None):
         '''
-        query host in given region or given host id
+        query eip in given id
         :param region:
         :param uhostids:
         :param offset:
@@ -48,7 +48,33 @@ class UnetManager(base.Manager):
         return self._get(body)
 
 
-    def eip_delete(self,region,eipid):
+    def eip_update(self,region,eipid,name=None,tag=None,remark=None):
+        '''
+        update an eip
+        :param region:
+        :param eipid:
+        :param name:
+        :param tag:
+        :param remark:
+        :return:
+        '''
+        body={}
+        body['Region']=region
+        body['Action']='UpdateEIPAttribute'
+        body['EIPId']=eipid
+        if not name and not tag and remark:
+            raise uexceptions.BadParameters
+        if name:
+            body['Name']=name
+        if tag:
+            body['Tag']=tag
+        if remark:
+            body['Remark']=tag
+
+        return self._get(body)
+
+
+    def eip_release(self,region,eipid):
         '''
         release an eip
         :param region:
@@ -155,7 +181,7 @@ class UnetManager(base.Manager):
         return self._get(body)
 
 
-    def vip_create(self,region,count=None):
+    def vip_allocate(self,region,count=None):
         '''
         allocate a vip
         :param region:
@@ -184,7 +210,7 @@ class UnetManager(base.Manager):
         return self._get(body)
 
 
-    def vip_delete(self,region,vip):
+    def vip_release(self,region,vip):
         '''
         release a vip
         :param region:
@@ -297,7 +323,7 @@ class UnetManager(base.Manager):
         return self._get(body)
 
 
-    def delete_sec(self,region,groupid):
+    def sec_delete(self,region,groupid):
         '''
         delete given security group
         :param region:

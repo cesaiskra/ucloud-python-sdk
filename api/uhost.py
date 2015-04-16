@@ -359,6 +359,23 @@ class UhostManager(base.Manager):
         return self._get(body)
 
 
+    def detach_disk(self,region,uhostid,udiskid):
+        '''
+        detach a disk from an instance
+        :param region:
+        :param uhostid:
+        :param udiskid:
+        :return:
+        '''
+        body={}
+        body['Region']=region
+        body['Action']='DetachUdisk'
+        body['UHostId']=uhostid
+        body['UDiskId']=udiskid
+
+        return self._get(body)
+
+
     def create_snapshot(self,region,uhostid):
         '''
         take a snapshot of an instance

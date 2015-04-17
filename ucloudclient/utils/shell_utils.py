@@ -5,8 +5,6 @@ import textwrap
 import json
 
 
-
-
 def add_arg(func, *args, **kwargs):
     """Bind CLI arguments to a shell.py `do_foo` function."""
 

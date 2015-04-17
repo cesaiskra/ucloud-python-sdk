@@ -16,7 +16,6 @@ from utils import shell_utils
 import client
 import uexceptions
 
-
 logger = logging.getLogger(__name__)
 
 class UcloudClientArgumentParser(argparse.ArgumentParser):
@@ -274,7 +273,7 @@ class UcloudShell(object):
         ucloud_pubkey=args.ucloud_pubkey
         ucloud_prikey=args.ucloud_prikey
 
-        self.cs=client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,timming=args.timings)
+        self.cs= client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,timming=args.timings)
 
         args.func(self.cs, args)
 

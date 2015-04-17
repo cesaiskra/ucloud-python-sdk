@@ -1,8 +1,8 @@
 import logging
 import argparse
 
-from utils import shell_utils
-from utils import api_utils
+from ucloudclient.utils import api_utils
+from ucloudclient.utils import shell_utils
 
 
 logger = logging.getLogger(__name__)

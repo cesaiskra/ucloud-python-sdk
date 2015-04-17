@@ -1,5 +1,5 @@
-from utils import base
-import uexceptions
+from ucloudclient import uexceptions
+from ucloudclient.utils import base
 
 class UnetManager(base.Manager):
     '''

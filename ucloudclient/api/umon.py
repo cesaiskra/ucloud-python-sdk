@@ -1,5 +1,4 @@
-from utils import base
-
+from ucloudclient.utils import base
 
 class UnetManager(base.Manager):
     '''

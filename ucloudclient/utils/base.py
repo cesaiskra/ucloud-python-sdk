@@ -9,8 +9,8 @@ import glob
 import errno
 import time
 
-import uexceptions
-from utils import api_utils
+from ucloudclient.utils import api_utils
+from ucloudclient import uexceptions
 
 
 class HTTPClient(object):

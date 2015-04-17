@@ -4,10 +4,13 @@
 
 ####1. sdk usage:
 
+        a.install via pip:
+        #pip install ucloudclient
 
-        from ucloud-python-sdk import client as uclient
+
+        from ucloudclient.client import Client as uclient
         cl=uclient(base_url, public_key, private_key)
-        print cl.uhost.get(region="cnnorth-03",uhostids="uhost-4dmzop")
+        print cl.uhost.get(region="us-west-01")
 
         output:
         {u'Action': u'DescribeUHostInstanceResponse', u'TotalCount': 1, u'RetCode': 0,

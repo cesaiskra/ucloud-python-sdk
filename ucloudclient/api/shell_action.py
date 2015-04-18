@@ -48,7 +48,13 @@ def _print_action_result(d):
 
 
 def _print_dict(d):
+    '''
+    print key value table
+    '''
     return shell_utils.print_dict(d)
+
+def _print_origin_dict(d):
+    return shell_utils.print_original_dict(d)
 
 
 def _print_host(d):
@@ -164,7 +170,7 @@ def do_uhost_create(cs,args):
     '''
     boot a host
     '''
-    print args
+    
     result=cs.uhost.create(args.ucloud_region,args.imageid,args.loginmode)
     _print_action_result(result)
 
@@ -178,7 +184,7 @@ def do_uhost_start(cs,args):
     '''
     start a host
     '''
-    print args
+    
     result=cs.uhost.start(args.ucloud_region,args.uhostid)
     _print_action_result(result)
 
@@ -192,7 +198,7 @@ def do_uhost_stop(cs,args):
     '''
     stop a host
     '''
-    print args
+    
     result=cs.uhost.stop(args.ucloud_region,args.uhostid)
     _print_action_result(result)
 
@@ -206,7 +212,7 @@ def do_uhost_terminate(cs,args):
     '''
     terminate a host
     '''
-    print args
+    
     result=cs.uhost.terminate(args.ucloud_region,args.uhostid)
     _print_action_result(result)
 
@@ -238,7 +244,7 @@ def do_uhost_resize(cs,args):
     '''
     resize a host
     '''
-    print args
+    
     result=cs.uhost.resize(args.ucloud_region,args.uhostid,args.cpu,
                            args.memory,args.diskspace)
     _print_action_result(result)
@@ -268,7 +274,7 @@ def do_uhost_reinstall(cs,args):
     '''
     reinstall a host
     '''
-    print args
+    
     result=cs.uhost.reinstall(args.ucloud_region,args.uhostid,args.password,
                               args.imageid,args.reservedisk)
     _print_action_result(result)
@@ -288,7 +294,7 @@ def do_uhost_reset_password(cs,args):
     '''
     reset a host's password
     '''
-    print args
+    
     result=cs.uhost.reset_password(args.ucloud_region,args.uhostid,args.password)
     _print_action_result(result)
 
@@ -302,7 +308,7 @@ def do_uhost_reboot(cs,args):
     '''
     reboot a host
     '''
-    print args
+    
     result=cs.uhost.reboot(args.ucloud_region,args.uhostid)
     _print_action_result(result)
 
@@ -316,7 +322,7 @@ def do_uhost_show(cs,args):
     '''
     show detail of a host
     '''
-    print args
+    
     host=cs.uhost.get(args.ucloud_region,
                       [args.uhostid]).get('UHostSet')[0]
     _print_host(host)
@@ -326,7 +332,7 @@ def do_uhost_list(cs,args):
     '''
     list  uhosts
     '''
-    print args
+    
     uhosts = cs.uhost.get(args.ucloud_region).get('UHostSet')
     shell_utils.print_list(uhosts,['UHostId','Name','Tag','State',
                                    'BasicImageName'])
@@ -337,7 +343,7 @@ def do_uhost_image_list(cs,args):
     list all images
     '''
     images=cs.uhost.get_image(args.ucloud_region).get('ImageSet')
-    shell_utils.print_list(images,['ImageId','ImageName'])
+    shell_utils.print_list(images,['ImageId','ImageName','OsType'])
 
 
 @shell_utils.arg(
@@ -354,7 +360,7 @@ def do_uhost_modify_name(cs,args):
     '''
     modify a host's name
     '''
-    print args
+    
     result=cs.uhost.modify_name(args.ucloud_region,args.uhostid,args.name)
     _print_action_result(result)
 
@@ -373,7 +379,7 @@ def do_uhost_modify_name(cs,args):
     '''
     modify a host's tag
     '''
-    print args
+    
     result=cs.uhost.modify_name(args.ucloud_region,args.uhostid,args.tag)
     _print_action_result(result)
 
@@ -416,7 +422,7 @@ def do_uhost_get_price(cs,args):
     '''
     get price of given type of host/s
     '''
-    print args
+    
     result=cs.uhost.get_price(args.ucloud_region,args.imageid,args.cpu,
                               args.memory,args.count,args.chargetype,
                               args.diskspace)
@@ -432,7 +438,7 @@ def do_uhost_get_vnc(cs,args):
     '''
     get a host's vnc connection information
     '''
-    print args
+    
     result=cs.uhost.get_vnc(args.ucloud_region,args.uhostid)
     _print_dict(result)
 
@@ -456,10 +462,10 @@ def do_uhost_create_image(cs,args):
     '''
     create an image from a given host
     '''
-    print args
+    
     result=cs.uhost.create_image(args.ucloud_region,args.uhostid,args.imageid,
                             args.image_desc)
-    _print_dict(result)
+    _print_action_result(result)
 
 
 @shell_utils.arg(
@@ -471,7 +477,7 @@ def do_uhost_delete_image(cs,args):
     '''
     delete an image by id
     '''
-    print args
+    
     result=cs.uhost.delete_image(args.ucloud_region,args.imageid)
     _print_action_result(result)
 
@@ -490,7 +496,7 @@ def do_uhost_attach_disk(cs,args):
     '''
     attach a disk to a host
     '''
-    print args
+    
     result=cs.uhost.attach_disk(args.ucloud_region,args.uhostid,args.udiskid)
     _print_action_result(result)
 
@@ -509,7 +515,7 @@ def do_uhost_detach_disk(cs,args):
     '''
     attach a disk to a host
     '''
-    print args
+    
     result=cs.uhost.detach_disk(args.ucloud_region,args.uhostid,args.udiskid)
     _print_action_result(result)
 
@@ -523,9 +529,9 @@ def do_uhost_create_snapshot(cs,args):
     '''
     create a snapshot from a host
     '''
-    print args
+    
     result=cs.uhost.create_snapshot(args.ucloud_region,args.uhostid)
-    _print_dict(result)
+    _print_action_result(result)
 
 
 @shell_utils.arg(
@@ -537,9 +543,9 @@ def do_uhost_list_snapshot(cs,args):
     '''
     list snapshots of an instance
     '''
-    print args
+    
     result=cs.uhost.list_snapshot(args.ucloud_region,args.uhostid)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -576,12 +582,14 @@ def do_umon_metric_get(cs,args):
     '''
     get metic data
     '''
-    print args
-    metrics=args.metrics.split('&')
+    
+    metrics=None
+    if args.metrics:
+        metrics=args.metrics.split('&')
     result=cs.umon.metric_get(args.ucloud_region,metrics,args.resourceid,
                               args.resource_type,args.time_range,
                               args.begin_time,args.end_time)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -608,10 +616,10 @@ def do_unet_eip_create(cs,args):
     '''
     create an eip
     '''
-    print args
+    
     result=cs.unet.eip_create(args.ucloud_region,args.operator_name,
                               args.bandwidth,args.charge_type,args.quantity)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -633,11 +641,13 @@ def do_unet_eip_get(cs,args):
     '''
     query eip in given id/s
     '''
-    print args
-    ids=args.id.split('&')
+    ids=None
+    
+    if args.id:
+        ids=args.id.split('&')
     result=cs.unet.eip_get(args.ucloud_region,ids,
                               args.offset,args.limit)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -664,7 +674,6 @@ def do_unet_eip_update(cs,args):
     '''
     update an eip
     '''
-    print args
     result=cs.unet.eip_update(args.ucloud_region,args.id,
                               args.name,args.tag,args.remark)
     _print_action_result(result)
@@ -679,7 +688,7 @@ def do_unet_eip_release(cs,args):
     '''
     release an eip
     '''
-    print args
+    
     result=cs.unet.eip_release(args.ucloud_region,args.id,)
     _print_action_result(result)
 
@@ -703,7 +712,7 @@ def do_unet_eip_bind(cs,args):
     '''
     bind ip to given resource
     '''
-    print args
+    
     result=cs.unet.eip_bind(args.ucloud_region,args.id,
                               args.resource_type,args.reource_id)
     _print_action_result(result)
@@ -728,7 +737,7 @@ def do_unet_eip_unbind(cs,args):
     '''
     unbind ip to given resource
     '''
-    print args
+    
     result=cs.unet.eip_unbind(args.ucloud_region,args.id,
                               args.resource_type,args.reource_id)
     _print_action_result(result)
@@ -748,7 +757,7 @@ def do_unet_eip_bandwidth_modify(cs,args):
     '''
     modify bandwidth of a given eip
     '''
-    print args
+    
     result=cs.unet.eip_bandwidth_modify(args.ucloud_region,args.id,
                               args.bandwidth)
     _print_action_result(result)
@@ -768,7 +777,7 @@ def do_unet_eip_weight_modify(cs,args):
     '''
     modify weight of a given eip
     '''
-    print args
+    
     result=cs.unet.eip_weight_modify(args.ucloud_region,args.id,
                               args.weight)
     _print_action_result(result)
@@ -793,10 +802,10 @@ def do_unet_eip_price_get(cs,args):
     '''
     get eip price
     '''
-    print args
+    
     result=cs.unet.eip_price_get(args.ucloud_region,args.id,
                               args.weight)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -808,18 +817,18 @@ def do_unet_vip_allocate(cs,args):
     '''
     allocate a vip
     '''
-    print args
+    
     result=cs.unet.vip_allocate(args.ucloud_region,args.count)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 def do_unet_vip_get(cs,args):
     '''
     list  vip
     '''
-    print args
+    
     result=cs.unet.vip_get(args.ucloud_region)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -831,7 +840,7 @@ def do_unet_vip_release(cs,args):
     '''
     release a vip
     '''
-    print args
+    
     result=cs.unet.vip_release(args.ucloud_region,args.vip_address)
     _print_action_result(result)
 
@@ -855,10 +864,10 @@ def do_unet_sec_get(cs,args):
     '''
     get security group info
     '''
-    print args
+    
     result=cs.unet.sec_get(args.ucloud_region,args.resource_type,
                               args.resource_id,args.group_id)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -870,9 +879,9 @@ def do_unet_sec_reource_get(cs,args):
     '''
     get resource attached to given security group
     '''
-    print args
+    
     result=cs.unet.sec_reource_get(args.ucloud_region,args.group_id)
-    _print_dict(result)
+    _print_origin_dict(result)
 
 
 @shell_utils.arg(
@@ -895,8 +904,10 @@ def do_unet_sec_creat(cs,args):
     '''
     create security group
     '''
-    print args
-    rules=args.rule.split('&')
+    
+    rules=None
+    if args.rule:
+        rules=args.rule.split('&')
     result=cs.unet.sec_creat(args.ucloud_region,args.name,rules,
                              args.desciption)
     _print_action_result(result)
@@ -917,8 +928,10 @@ def do_unet_sec_update(cs,args):
     '''
     update security group
     '''
-    print args
-    rules=args.rule.split('&')
+    
+    rules=None
+    if args.rule:
+        rules=args.rule.split('&')
     result=cs.unet.sec_update(args.ucloud_region,args.id,rules)
     _print_action_result(result)
 
@@ -942,7 +955,7 @@ def do_unet_sec_grant(cs,args):
     '''
     grant given security group to specified resource
     '''
-    print args
+    
     result=cs.unet.sec_grant(args.ucloud_region,args.id,args.resource_type,
                              args.resource_id)
     _print_action_result(result)
@@ -957,6 +970,6 @@ def do_unet_sec_delete(cs,args):
     '''
     delete given security group
     '''
-    print args
+    
     result=cs.unet.sec_delete(args.ucloud_region,args.id)
     _print_action_result(result)

@@ -46,6 +46,9 @@ def multi_arg(*args, **kwargs):
         return func
     return _decorator
 
+def print_original_dict(d):
+    d=json.dumps(d,indent=2)
+    print(d)
 
 def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
     pt = prettytable.PrettyTable([dict_property, dict_value], caching=False)
@@ -80,6 +83,14 @@ def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
 
 
 def print_list(objs, fields, formatters={}, sortby_index=None):
+    '''
+    give the fields of objs to be printed.
+    :param objs:
+    :param fields: the fields to be printed
+    :param formatters:
+    :param sortby_index:
+    :return:
+    '''
     if sortby_index is None:
         sortby = None
     else:

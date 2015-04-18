@@ -46,7 +46,7 @@ output:
 		hyphendeMacBook-Air:ucloud-python-sdk hyphen$ source ucloud.rc
 命令帮助:
 
-        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ python ucloudclient/shell.py 
+        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud help
         usage: ucloud [--debug] [--timings] <subcommand> ...
 
         Command line interface for ucloud
@@ -107,7 +107,7 @@ output:
 
 命令样例:
 
-        hyphendeMacBook-Air:ucloud-python-sdk hyphen$ python shell.py uhost-show --uhostid uhost-4dmzop
+        hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud uhost-show --uhostid uhost-4dmzop
         +----------------+------------------------------------------------------------------+
         | Property       | Value                                                            |
         +----------------+------------------------------------------------------------------+

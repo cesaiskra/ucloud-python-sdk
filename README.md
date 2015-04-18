@@ -1,18 +1,23 @@
 ###Ucloud Python SDK and Command-Line Tool
+this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash env.
+pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)    
+welcome to contribute this tools.
 
-#####this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash env.
 
 ####1. sdk usage:
 
-        a.install via pip:
-        #pip install ucloudclient
+a.install via pip:
+	
+	#pip install ucloudclient
 
+example codes:
 
         from ucloudclient.client import Client as uclient
         cl=uclient(base_url, public_key, private_key)
         print cl.uhost.get(region="us-west-01")
 
-        output:
+output:
+
         {u'Action': u'DescribeUHostInstanceResponse', u'TotalCount': 1, u'RetCode': 0,
         u'UHostSet': [{u'Remark': u'', u'Tag': u'Default', u'Name': u'yan-1',
         u'State': u'Running', u'IPSet': [{u'IP': u'10.11.1.126', u'Type': u'Private'},
@@ -38,32 +43,68 @@
 		export UCLOUD_PRIKEY="asdf"
 
 		hyphendeMacBook-Air:ucloud-python-sdk hyphen$ source ucloud.rc
+命令帮助:
 
-        hyphendeMacBook-Air:ucloud-python-sdk hyphen$ python shell.py
+        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ python ucloudclient/shell.py 
         usage: ucloud [--debug] [--timings] <subcommand> ...
 
         Command line interface for ucloud
 
         Positional arguments:
           <subcommand>
-            uhost-create    boot a host
-            uhost-image-list
-                            list all images
-            uhost-list      list uhosts
-            uhost-show      show a uhost
-            bash-completion
-                            Prints all of the commands and options to stdout so that
-                            the ucloud.bash_completion script doesn't have to hard
-                            code them.
-            help            Display help about this program or one of its subcommands.
+            uhost-attach-disk        attach a disk to a host
+            uhost-create             boot a host
+            uhost-create-image       create an image from a given host
+            uhost-create-snapshot    create a snapshot from a host
+            uhost-delete-image       delete an image by id
+            uhost-detach-disk        attach a disk to a host
+            uhost-get-price          get price of given type of host/s
+            uhost-get-vnc            get a host's vnc connection information
+            uhost-image-list         list all images
+            uhost-list               list uhosts
+            uhost-list-snapshot      list snapshots of an instance
+            uhost-modify-name        modify a host's tag
+            uhost-reboot             reboot a host
+            uhost-reinstall          reinstall a host
+            uhost-reset-password     reset a host's password
+            uhost-resize             resize a host
+            uhost-show               show detail of a host
+            uhost-start              start a host
+            uhost-stop               stop a host
+            uhost-terminate          terminate a host
+            umon-metric-get          get metic data
+            unet-eip-bandwidth-modify
+                                     modify bandwidth of a given eip
+            unet-eip-bind            bind ip to given resource
+            unet-eip-create          create an eip
+            unet-eip-get             query eip in given id/s
+            unet-eip-price-get       get eip price
+            unet-eip-release         release an eip
+            unet-eip-unbind          unbind ip to given resource
+            unet-eip-update          update an eip
+            unet-eip-weight-modify   modify weight of a given eip
+            unet-sec-creat           create security group
+            unet-sec-delete          delete given security group
+            unet-sec-get             get security group info
+            unet-sec-grant           grant given security group to specified resource
+            unet-sec-reource-get     get resource attached to given security group
+            unet-sec-update          update security group
+            unet-vip-allocate        allocate a vip
+            unet-vip-get             list vip
+            unet-vip-release         release a vip
+            bash-completion          Prints all of the commands and options to stdout
+                                     so that the ucloud.bash_completion script doesn't
+                                     have to hard code them.
+            help                     Display help about this program or one of its
+                                     subcommands.
 
         Optional arguments:
-          --debug           Print debugging output
-          --timings         Print call timing info
+          --debug                    Print debugging output
+          --timings                  Print call timing info
 
         See "ucloud help COMMAND" for help on a specific command.
 
-
+命令样例:
 
         hyphendeMacBook-Air:ucloud-python-sdk hyphen$ python shell.py uhost-show --uhostid uhost-4dmzop
         +----------------+------------------------------------------------------------------+

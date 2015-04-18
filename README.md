@@ -41,6 +41,7 @@ output:
 		export UCLOUD_URL="https://api.ucloud.cn"
 		export UCLOUD_PUBKEY="asdf"
 		export UCLOUD_PRIKEY="asdf"
+		export PS1='[\u@\h \W(ucloudclient)]\$ '
 
 		hyphendeMacBook-Air:ucloud-python-sdk hyphen$ source ucloud.rc
 命令帮助:

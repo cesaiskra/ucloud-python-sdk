@@ -1,7 +1,7 @@
 Metadata-Version: 1.0
 Name: ucloud
 Version: 1.0.4
-Summary: ucloud python client and command line tools
+Summary: Ucloud(Ucloud.cn) python client and command line tools
 Home-page: https://github.com/yanheven/ucloud-python-sdk
 Author: yanhaifeng(颜海峰)
 Author-email: yanheven@gmail.com

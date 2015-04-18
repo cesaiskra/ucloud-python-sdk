@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = 'ucloud',
+    name = 'ucloudclient',
     version = '1.0.4',
     packages = ['ucloudclient'],
     # packages = find_packages('ucloudclient'),
@@ -18,4 +18,7 @@ setup(
     include_package_data = True,
     platforms = 'any',
     install_requires = ['PrettyTable>=0.7,<0.8','six>=1.9.0'],
+    entry_points = {
+        'console_scripts': ['ucloud=ucloudclient.shell:main'],
+    }
 )

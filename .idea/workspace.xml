@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="618ef9e1-8da8-4e8a-9054-078677638e44" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ucloud.egg-info/PKG-INFO" afterPath="$PROJECT_DIR$/ucloud.egg-info/PKG-INFO" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ucloud.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/ucloud.egg-info/SOURCES.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -35,8 +37,8 @@
       <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1111112" vertical-offset="0" max-vertical-offset="2055">
-              <caret line="2" column="48" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="48" />
+            <state vertical-scroll-proportion="-5.0" vertical-offset="390" max-vertical-offset="2070">
+              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -68,8 +70,8 @@
       <file leaf-file-name="setup.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27522936" vertical-offset="0" max-vertical-offset="405">
-              <caret line="6" column="18" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.86238533" vertical-offset="33" max-vertical-offset="450">
+              <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -991,8 +993,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1111112" vertical-offset="0" max-vertical-offset="2055">
-          <caret line="2" column="48" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="48" />
+        <state vertical-scroll-proportion="-5.0" vertical-offset="390" max-vertical-offset="2070">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1002,8 +1004,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27522936" vertical-offset="0" max-vertical-offset="405">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.86238533" vertical-offset="33" max-vertical-offset="450">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
           <folding />
         </state>
       </provider>

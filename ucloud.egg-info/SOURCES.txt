@@ -4,6 +4,7 @@ setup.py
 ucloud.egg-info/PKG-INFO
 ucloud.egg-info/SOURCES.txt
 ucloud.egg-info/dependency_links.txt
+ucloud.egg-info/entry_points.txt
 ucloud.egg-info/requires.txt
 ucloud.egg-info/top_level.txt
 ucloudclient/__init__.py

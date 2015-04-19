@@ -51,10 +51,10 @@ def _print_dict(d):
     '''
     print key value table
     '''
-    return shell_utils.print_dict(d)
+    shell_utils.print_dict(d)
 
 def _print_origin_dict(d):
-    return shell_utils.print_original_dict(d)
+    shell_utils.print_original_dict(d)
 
 
 def _print_host(d):
@@ -201,7 +201,7 @@ def do_uhost_list(cs,args):
     '''
 
     uhosts = cs.uhost.get(args.ucloud_region,offset=args.offset,limit=args.limit).get('UHostSet')
-    shell_utils.print_list(uhosts,['UHostId','Name','Tag','State',
+    shell_utils.print_list(uhosts,['Name','UHostId','Tag','State',
                                    'BasicImageName'])
 
 
@@ -607,13 +607,11 @@ def do_umon_metric_get(cs,args):
 
 
 @shell_utils.arg(
-    '--operator_name',
-    default=None,
+    'operator_name',
     metavar='<operator_name>',
     help=("operator name."))
 @shell_utils.arg(
-    '--bandwidth',
-    default=None,
+    'bandwidth',
     metavar='<bandwidth>',
     help=("bandwidth of elastic ip."))
 @shell_utils.arg(
@@ -637,11 +635,6 @@ def do_unet_eip_create(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    metavar='<id>',
-    nargs='+',
-    help=("eip id(ids), if more than one eip"))
-@shell_utils.arg(
     '--offset',
     default=None,
     metavar='<offset>',
@@ -651,13 +644,29 @@ def do_unet_eip_create(cs,args):
     default=None,
     metavar='<limit>',
     help=("limit of return."))
-def do_unet_eip_get(cs,args):
+def do_unet_eip_list(cs,args):
     '''
-    query eip in given id/s
+    list eip
     '''
 
-    result=cs.unet.eip_get(args.ucloud_region,args.id,
-                              args.offset,args.limit)
+    result=cs.unet.eip_get(args.ucloud_region,
+                              args.offset,args.limit).get('EIPSet')
+    for eip in result:
+        ip=eip.get('EIPAddr')[0]
+        eip.update(ip)
+    shell_utils.print_list(result,['Name','EIPId','Bandwidth','IP','OperatorName'])
+
+
+@shell_utils.arg(
+    'id',
+    metavar='<id>',
+    help=("eip id"))
+def do_unet_eip_show(cs,args):
+    '''
+    show eip details info
+    '''
+
+    result=cs.unet.eip_get(args.ucloud_region,args.id)
     _print_origin_dict(result)
 
 
@@ -690,8 +699,7 @@ def do_unet_eip_update(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of eip."))
 def do_unet_eip_release(cs,args):
@@ -704,18 +712,15 @@ def do_unet_eip_release(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of eip."))
 @shell_utils.arg(
-    '--resource_type',
-    default=None,
+    'resource_type',
     metavar='<resource_type>',
     help=("resource_type."))
 @shell_utils.arg(
-    '--reource_id',
-    default=None,
+    'reource_id',
     metavar='<reource_id>',
     help=("reource_id."))
 def do_unet_eip_bind(cs,args):
@@ -729,18 +734,15 @@ def do_unet_eip_bind(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of eip."))
 @shell_utils.arg(
-    '--resource_type',
-    default=None,
+    'resource_type',
     metavar='<resource_type>',
     help=("resource_type."))
 @shell_utils.arg(
-    '--reource_id',
-    default=None,
+    'reource_id',
     metavar='<reource_id>',
     help=("reource_id."))
 def do_unet_eip_unbind(cs,args):
@@ -754,13 +756,11 @@ def do_unet_eip_unbind(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of eip."))
 @shell_utils.arg(
-    '--bandwidth',
-    default=None,
+    'bandwidth',
     metavar='<bandwidth>',
     help=("bandwidth of eip."))
 def do_unet_eip_bandwidth_modify(cs,args):
@@ -774,13 +774,11 @@ def do_unet_eip_bandwidth_modify(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of eip."))
 @shell_utils.arg(
-    '--weight',
-    default=None,
+    'weight',
     metavar='<weight>',
     help=("weight of eip."))
 def do_unet_eip_weight_modify(cs,args):
@@ -794,13 +792,11 @@ def do_unet_eip_weight_modify(cs,args):
 
 
 @shell_utils.arg(
-    '--operator_name',
-    default=None,
+    'operator_name',
     metavar='<operator_name>',
     help=("operator_name of eip."))
 @shell_utils.arg(
-    '--bandwidth',
-    default=None,
+    'bandwidth',
     metavar='<bandwidth>',
     help=("bandwidth of eip."))
 @shell_utils.arg(
@@ -819,8 +815,7 @@ def do_unet_eip_price_get(cs,args):
 
 
 @shell_utils.arg(
-    '--count',
-    default=None,
+    'count',
     metavar='<count>',
     help=("count of vip."))
 def do_unet_vip_allocate(cs,args):
@@ -832,18 +827,19 @@ def do_unet_vip_allocate(cs,args):
     _print_origin_dict(result)
 
 
-def do_unet_vip_get(cs,args):
+def do_unet_vip_list(cs,args):
     '''
     list  vip
     '''
-    
-    result=cs.unet.vip_get(args.ucloud_region)
-    _print_origin_dict(result)
+    vips=[]
+    result=cs.unet.vip_get(args.ucloud_region).get('DataSet')
+    for vip in result:
+        vips.append({'virtual ip':vip})
+    shell_utils.print_list(vips,['virtual ip'])
 
 
 @shell_utils.arg(
-    '--vip_address',
-    default=None,
+    'vip_address',
     metavar='<vip>',
     help=("vip address."))
 def do_unet_vip_release(cs,args):
@@ -865,32 +861,39 @@ def do_unet_vip_release(cs,args):
     default=None,
     metavar='<resource_id>',
     help=("resource_id of security group."))
-@shell_utils.arg(
-    '--group_id',
-    default=None,
-    metavar='<group_id>',
-    help=("group_id of security group."))
-def do_unet_sec_get(cs,args):
+def do_unet_sec_list(cs,args):
     '''
-    get security group info
+    get security group info.you can filte by reource id or resource type.
     '''
     
     result=cs.unet.sec_get(args.ucloud_region,args.resource_type,
-                              args.resource_id,args.group_id)
+                              args.resource_id).get('DataSet')
+    shell_utils.print_list(result,['GroupName','GroupId','Type'])
+
+
+@shell_utils.arg(
+    'id',
+    metavar='<id>',
+    help=("id of security group."))
+def do_unet_sec_show(cs,args):
+    '''
+    get security group details info.
+    '''
+
+    result=cs.unet.sec_get(args.ucloud_region,groupid=args.id).get('DataSet')
     _print_origin_dict(result)
 
 
 @shell_utils.arg(
-    '--group_id',
-    default=None,
-    metavar='<group_id>',
+    'id',
+    metavar='<sec_group_id>',
     help=("group_id of security group."))
-def do_unet_sec_reource_get(cs,args):
+def do_unet_sec_resource_get(cs,args):
     '''
     get resource attached to given security group
     '''
     
-    result=cs.unet.sec_reource_get(args.ucloud_region,args.group_id)
+    result=cs.unet.sec_reource_get(args.ucloud_region,args.id).get('')
     _print_origin_dict(result)
 
 
@@ -939,18 +942,15 @@ def do_unet_sec_update(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of security group."))
 @shell_utils.arg(
-    '--resource_type',
-    default=None,
+    'resource_type',
     metavar='<resource_type>',
     help=("resource_type of security group."))
 @shell_utils.arg(
-    '--resource_id',
-    default=None,
+    'resource_id',
     metavar='<resource_id>',
     help=("resource_id"))
 def do_unet_sec_grant(cs,args):
@@ -964,9 +964,8 @@ def do_unet_sec_grant(cs,args):
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
-    metavar='<id>',
+    'id',
+    metavar='<sec_group_id>',
     help=("id of security group."))
 def do_unet_sec_delete(cs,args):
     '''

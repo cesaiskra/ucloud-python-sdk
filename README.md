@@ -1,7 +1,21 @@
 ###Ucloud Python SDK and Command-Line Tool
 this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash env.
-pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)    
 welcome to contribute to this tools.
+
+####设计理念
+这个项目包含python sdk 和 命令行工具,覆盖了UHOST,UNET,UMON这三大资源管理.SDK设计上也是按前面三大资源来做区分.
+由于一直有研究openstack,发现它的命令行做得很不错,所以这里命令行则是参考了openstack 命令行工具的资源管理命令,
+基本上每种资源都有以下五个操作:
+1. list:查询本类所有的创建的资源,输出应该是列表,包含资源名称和ID等重要信息.
+2. show:通过ID查询本类资源的某个创建资源的详细信息.
+3. CUD:create, update, delete. 增删改三个操作.
+
+####特色:
+1. 命令可以加 "--debug" 来查看操作的关键路径的打印信息.
+2. 命令可以加 "--timming" 来获得执行命令所花费的时间.
+
+####软件查看下载:
+pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
 
 
 ####1. sdk usage:
@@ -41,13 +55,14 @@ output:
 		export UCLOUD_URL="https://api.ucloud.cn"
 		export UCLOUD_PUBKEY="asdf"
 		export UCLOUD_PRIKEY="asdf"
-		export PS1='[\u@\h \W(ucloudclient)]\$ '
+		export PS1='[\u@\h \W(ucloud)]\$ '
 
 		hyphendeMacBook-Air:ucloud-python-sdk hyphen$ source ucloud.rc
+
 命令帮助:
 
-        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud help
-        usage: ucloud [--debug] [--timings] <subcommand> ...
+        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ $ ucloud
+        usage: ucloud [--debug] [--timing] <subcommand> ...
 
         Command line interface for ucloud
 
@@ -62,9 +77,11 @@ output:
             uhost-get-price          get price of given type of host/s
             uhost-get-vnc            get a host's vnc connection information
             uhost-image-list         list all images
+            uhost-image-show         show image details
             uhost-list               list uhosts
             uhost-list-snapshot      list snapshots of an instance
-            uhost-modify-name        modify a host's tag
+            uhost-modify-name        modify a host's name
+            uhost-modify-tag         modify a host's tag
             uhost-reboot             reboot a host
             uhost-reinstall          reinstall a host
             uhost-reset-password     reset a host's password
@@ -78,20 +95,23 @@ output:
                                      modify bandwidth of a given eip
             unet-eip-bind            bind ip to given resource
             unet-eip-create          create an eip
-            unet-eip-get             query eip in given id/s
+            unet-eip-list            list eip
             unet-eip-price-get       get eip price
             unet-eip-release         release an eip
+            unet-eip-show            show eip details info
             unet-eip-unbind          unbind ip to given resource
             unet-eip-update          update an eip
             unet-eip-weight-modify   modify weight of a given eip
-            unet-sec-creat           create security group
+            unet-sec-create          create security group
             unet-sec-delete          delete given security group
-            unet-sec-get             get security group info
             unet-sec-grant           grant given security group to specified resource
-            unet-sec-reource-get     get resource attached to given security group
+            unet-sec-list            get security group info.you can filte by reource
+                                     id or resource type.
+            unet-sec-resource-get    get resource attached to given security group
+            unet-sec-show            get security group details info.
             unet-sec-update          update security group
             unet-vip-allocate        allocate a vip
-            unet-vip-get             list vip
+            unet-vip-list            list vip
             unet-vip-release         release a vip
             bash-completion          Prints all of the commands and options to stdout
                                      so that the ucloud.bash_completion script doesn't
@@ -101,13 +121,13 @@ output:
 
         Optional arguments:
           --debug                    Print debugging output
-          --timings                  Print call timing info
+          --timing                   Print call timing info
 
         See "ucloud help COMMAND" for help on a specific command.
 
 命令样例:
 
-        hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud uhost-show --uhostid uhost-4dmzop
+        hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud uhost-show uhost-4dmzop
         +----------------+------------------------------------------------------------------+
         | Property       | Value                                                            |
         +----------------+------------------------------------------------------------------+
@@ -131,3 +151,26 @@ output:
         | UHostId        | uhost-4dmzop                                                     |
         | UHostType      | Normal                                                           |
         +----------------+------------------------------------------------------------------+
+
+        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud  uhost-image-list
+
+        +---------------+------------------------+---------+
+        | ImageId       | ImageName              | OsType  |
+        +---------------+------------------------+---------+
+        | uimage-0duw4w | CentOS 5.8 64位        | Linux   |
+        | uimage-0nvikt | RHEL 6.2 64位          | Linux   |
+        | uimage-0xalan | Gentoo 2.2 64位        | Linux   |
+
+        (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud  uhost-image-show uimage-0duw4w
+        +------------------+--------------------------------------------------+
+        | Property         | Value                                            |
+        +------------------+--------------------------------------------------+
+        | CreateTime       | 1394435416                                       |
+        | ImageDescription | Community ENTerprise Operating System 5.8 64-bit |
+        | ImageId          | uimage-0duw4w                                    |
+        | ImageName        | CentOS 5.8 64位                                  |
+        | ImageType        | Base                                             |
+        | OsName           | CentOS 5.8 64位                                  |
+        | OsType           | Linux                                            |
+        | State            | Available                                        |
+        +------------------+--------------------------------------------------+

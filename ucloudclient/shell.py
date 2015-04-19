@@ -118,7 +118,7 @@ class UcloudShell(object):
             help=("Print debugging output"))
 
         parser.add_argument(
-            '--timings',
+            '--timing',
             default=False,
             action='store_true',
             help=("Print call timing info"))
@@ -273,24 +273,25 @@ class UcloudShell(object):
         ucloud_pubkey=args.ucloud_pubkey
         ucloud_prikey=args.ucloud_prikey
 
-        self.cs= client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,timming=args.timings)
+        self.cs= client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,debug=options.debug,timing=args.timing)
 
         args.func(self.cs, args)
 
-        if args.timings:
+        if args.timing:
             self._dump_timings(self.times + self.cs.get_timings())
 
-    def _dump_timings(self, timings):
-        class Tyme(object):
-            def __init__(self, url, seconds):
-                self.url = url
-                self.seconds = seconds
-        results = [Tyme(url, end - start) for url, start, end in timings]
+    def _dump_timings(self, timing):
+        results = [{'url':url,'seconds':end-start} for url, start, end in timing]
         total = 0.0
         for tyme in results:
-            total += tyme.seconds
-        results.append(Tyme("Total", total))
-        shell_utils.print_list(results, ["url", "seconds"], sortby_index=None)
+            total += tyme.get('seconds')
+        results.append({"Total": total})
+        #if a command contain more than one http request, we can type trace of
+        # each request with time info.
+        # shell_utils.print_list(results, ["url", "seconds"], sortby_index=None)
+
+        #if a command only contain one http request, just type the total seconds.
+        print("\nTiming>>>>\nThis Command Spent %s Seconds to Finish the HTTP request.\n"%total)
 
 
 

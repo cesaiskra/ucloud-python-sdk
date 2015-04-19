@@ -9,7 +9,7 @@ class Client(object):
     '''
     ucloud python sdk client.
     '''
-    def __init__(self,base_url,public_key,private_key,timming=False):
+    def __init__(self,base_url,public_key,private_key,debug=False,timing=False):
         self.base_url=base_url
         self.private_key=private_key
         self.public_key=public_key
@@ -18,7 +18,7 @@ class Client(object):
         self.unet= unet.UnetManager(self)
         self.umon= umon.UnetManager(self)
 
-        self.client= base.HTTPClient(base_url,timming)
+        self.client= base.HTTPClient(base_url,debug,timing)
 
 
     def get_timings(self):

@@ -46,9 +46,11 @@ def multi_arg(*args, **kwargs):
         return func
     return _decorator
 
+
 def print_original_dict(d):
-    d=json.dumps(d,indent=2)
+    d=json.dumps(d, encoding='UTF-8', ensure_ascii=False,indent=2)
     print(d)
+
 
 def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
     pt = prettytable.PrettyTable([dict_property, dict_value], caching=False)

@@ -15,9 +15,10 @@ from ucloudclient import uexceptions
 
 class HTTPClient(object):
 
-    def __init__(self, base_url,timming):
+    def __init__(self, base_url,debug,timing):
         self.base_url = base_url
-        self.timming=timming
+        self.timing=timing
+        self.debug=debug
         self.time=[]
         o = urlparse.urlsplit(base_url)
         if o.scheme == 'https':
@@ -35,14 +36,15 @@ class HTTPClient(object):
 
     def get(self, resouse, params):
         resouse += "?" + urllib.urlencode(params)
-        print("%s%s" % (self.base_url, resouse))
+        if self.debug:
+            print("DEBUG START>>>>\nRequest: %s%s\n" % (self.base_url, resouse))
         response=None
 
         try:
-            if self.timming:
+            if self.timing:
                 start_time = time.time()
             self.conn.request("GET", resouse)
-            if self.timming:
+            if self.timing:
                 self.time.append(("%s %s" % ('GET', resouse),
                                start_time, time.time()))
 
@@ -53,7 +55,8 @@ class HTTPClient(object):
 
         try:
             response = json.loads(respones_raw)
-            print(response)
+            if self.debug:
+                print("Respone: %s\n<<<<DEBUG END\n"%json.dumps(response, encoding='UTF-8', ensure_ascii=False,indent=2))
 
         except Exception as e:
             raise uexceptions.NoJsonFound(e)

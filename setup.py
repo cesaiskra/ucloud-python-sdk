@@ -9,7 +9,7 @@ setup(
     # packages = find_packages('ucloudclient'),
     # package_dir = {'':'ucloudclient'},
     keywords = ('ucloud', 'client'),
-    description = 'Ucloud(Ucloud.cn) python client and command line tools.author bolg http://yanheven.github.io',
+    description = 'Ucloud(Ucloud.cn) python client and command line tools.Author\'s bolg http://yanheven.github.io',
     license = 'Apache License Version 2.0',
     url = 'https://github.com/yanheven/ucloud-python-sdk',
     author = 'yanhaifeng(颜海峰)',

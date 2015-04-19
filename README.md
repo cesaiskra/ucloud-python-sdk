@@ -1,7 +1,7 @@
 ###Ucloud Python SDK and Command-Line Tool
 this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash env.
 pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)    
-welcome to contribute this tools.
+welcome to contribute to this tools.
 
 
 ####1. sdk usage:

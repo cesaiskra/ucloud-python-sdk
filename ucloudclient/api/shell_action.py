@@ -104,13 +104,11 @@ def _print_host(d):
     metavar='<name>',
     help=("Name of host."))
 @shell_utils.arg(
-    '--imageid',
-    default=None,
+    'imageid',
     metavar='<imageid>',
     help=("imageid of host."))
 @shell_utils.arg(
-    '--loginmode',
-    default=None,
+    'loginmode',
     metavar='<loginmode>',
     help=("loginmode of host."))
 @shell_utils.arg(
@@ -170,15 +168,46 @@ def do_uhost_create(cs,args):
     '''
     boot a host
     '''
-    
     result=cs.uhost.create(args.ucloud_region,args.imageid,args.loginmode)
     _print_action_result(result)
 
 
 @shell_utils.arg(
-    '--uhostid',
+    'uhostid',
+    metavar='<uhost id>',
+    help=("uhostid of host."))
+def do_uhost_show(cs,args):
+    '''
+    show detail of a host
+    '''
+
+    host=cs.uhost.get(args.ucloud_region,
+                      [args.uhostid]).get('UHostSet')[0]
+    _print_host(host)
+
+@shell_utils.arg(
+    '--offset',
     default=None,
-    metavar='<uhostid>',
+    metavar='<offset>',
+    help=("offset of return."))
+@shell_utils.arg(
+    '--limit',
+    default=None,
+    metavar='<limit>',
+    help=("limit of return."))
+def do_uhost_list(cs,args):
+    '''
+    list  uhosts
+    '''
+
+    uhosts = cs.uhost.get(args.ucloud_region,offset=args.offset,limit=args.limit).get('UHostSet')
+    shell_utils.print_list(uhosts,['UHostId','Name','Tag','State',
+                                   'BasicImageName'])
+
+
+@shell_utils.arg(
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_start(cs,args):
     '''
@@ -190,9 +219,8 @@ def do_uhost_start(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_stop(cs,args):
     '''
@@ -204,9 +232,8 @@ def do_uhost_stop(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_terminate(cs,args):
     '''
@@ -218,9 +245,8 @@ def do_uhost_terminate(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
     '--cpu',
@@ -251,9 +277,8 @@ def do_uhost_resize(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
     '--imageid',
@@ -281,13 +306,11 @@ def do_uhost_reinstall(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
-    '--password',
-    default=None,
+    'password',
     metavar='<password>',
     help=("password of host."))
 def do_uhost_reset_password(cs,args):
@@ -300,9 +323,8 @@ def do_uhost_reset_password(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_reboot(cs,args):
     '''
@@ -312,48 +334,60 @@ def do_uhost_reboot(cs,args):
     result=cs.uhost.reboot(args.ucloud_region,args.uhostid)
     _print_action_result(result)
 
-
 @shell_utils.arg(
-    '--uhostid',
+    '--imagetype',
     default=None,
-    metavar='<uhostid>',
-    help=("uhostid of host."))
-def do_uhost_show(cs,args):
-    '''
-    show detail of a host
-    '''
-    
-    host=cs.uhost.get(args.ucloud_region,
-                      [args.uhostid]).get('UHostSet')[0]
-    _print_host(host)
-
-
-def do_uhost_list(cs,args):
-    '''
-    list  uhosts
-    '''
-    
-    uhosts = cs.uhost.get(args.ucloud_region).get('UHostSet')
-    shell_utils.print_list(uhosts,['UHostId','Name','Tag','State',
-                                   'BasicImageName'])
-
-
+    metavar='<image type>',
+    help=("imagetype."))
+@shell_utils.arg(
+    '--ostype',
+    default=None,
+    metavar='<os type>',
+    help=("operating system type."))
+@shell_utils.arg(
+    '--imageid',
+    default=None,
+    metavar='<image id>',
+    help=("imageid."))
+@shell_utils.arg(
+    '--offset',
+    default=None,
+    metavar='<offset>',
+    help=("offset."))
+@shell_utils.arg(
+    '--limit',
+    default=None,
+    metavar='<limit>',
+    help=("limit."))
 def do_uhost_image_list(cs,args):
     '''
     list all images
     '''
-    images=cs.uhost.get_image(args.ucloud_region).get('ImageSet')
+    images=cs.uhost.get_image(args.ucloud_region,args.imagetype,args.ostype,
+                              args.imageid,args.offset,
+                              args.limit).get('ImageSet')
     shell_utils.print_list(images,['ImageId','ImageName','OsType'])
 
 
+
 @shell_utils.arg(
-    '--uhostid',
+    'imageid',
     default=None,
-    metavar='<uhostid>',
+    metavar='<imageid>',
+    help=(" image ."))
+def do_uhost_image_show(cs,args):
+    '''
+    show image details
+    '''
+    images=cs.uhost.get_image(args.ucloud_region,image_id=args.imageid).get('ImageSet')[0]
+    _print_dict(images)
+
+@shell_utils.arg(
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
-    '--name',
-    default=None,
+    'name',
     metavar='<name>',
     help=("new name of host."))
 def do_uhost_modify_name(cs,args):
@@ -368,14 +402,14 @@ def do_uhost_modify_name(cs,args):
 @shell_utils.arg(
     '--uhostid',
     default=None,
-    metavar='<uhostid>',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
     '--tag',
     default=None,
     metavar='<tag>',
     help=("new tag of host."))
-def do_uhost_modify_name(cs,args):
+def do_uhost_modify_tag(cs,args):
     '''
     modify a host's tag
     '''
@@ -386,25 +420,21 @@ def do_uhost_modify_name(cs,args):
 
 
 @shell_utils.arg(
-    '--imageid',
-    default=None,
+    'imageid',
     metavar='<imageid>',
     help=("imageid of host."))
 @shell_utils.arg(
-    '--cpu',
-    default=None,
+    'cpu',
     type=int,
     metavar='<cpu>',
     help=("cpu of host."))
 @shell_utils.arg(
-    '--memory',
-    default=None,
+    'memory',
     type=int,
     metavar='<memory>',
     help=("memory of host."))
 @shell_utils.arg(
-    '--count',
-    default=None,
+    'count',
     metavar='<count>',
     help=("count of host."))
 @shell_utils.arg(
@@ -430,9 +460,8 @@ def do_uhost_get_price(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_get_vnc(cs,args):
     '''
@@ -444,15 +473,14 @@ def do_uhost_get_vnc(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
-    '--imageid',
+    '--imagename',
     default=None,
-    metavar='<imageid>',
-    help=("imageid of host."))
+    metavar='<imagename>',
+    help=("imagename of new image."))
 @shell_utils.arg(
     '--image_desc',
     default=None,
@@ -469,8 +497,7 @@ def do_uhost_create_image(cs,args):
 
 
 @shell_utils.arg(
-    '--imageid',
-    default=None,
+    'imageid',
     metavar='<imageid>',
     help=("imageid of host."))
 def do_uhost_delete_image(cs,args):
@@ -483,13 +510,11 @@ def do_uhost_delete_image(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
-    '--udiskid',
-    default=None,
+    'udiskid',
     metavar='<udiskid>',
     help=("udiskid of host."))
 def do_uhost_attach_disk(cs,args):
@@ -502,13 +527,11 @@ def do_uhost_attach_disk(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 @shell_utils.arg(
-    '--udiskid',
-    default=None,
+    'udiskid',
     metavar='<udiskid>',
     help=("udiskid of host."))
 def do_uhost_detach_disk(cs,args):
@@ -521,9 +544,8 @@ def do_uhost_detach_disk(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_create_snapshot(cs,args):
     '''
@@ -535,9 +557,8 @@ def do_uhost_create_snapshot(cs,args):
 
 
 @shell_utils.arg(
-    '--uhostid',
-    default=None,
-    metavar='<uhostid>',
+    'uhostid',
+    metavar='<uhost id>',
     help=("uhostid of host."))
 def do_uhost_list_snapshot(cs,args):
     '''
@@ -549,18 +570,15 @@ def do_uhost_list_snapshot(cs,args):
 
 
 @shell_utils.arg(
-    '--metrics',
-    default=None,
+    'metric',
     metavar='<metrics>',
-    help=("metrics name,if more than one metric,connect them with '&', eg.IORead&IOWrite..."))
+    help=("metrics name"))
 @shell_utils.arg(
-    '--resourceid',
-    default=None,
+    'resourceid',
     metavar='<resourceid>',
     help=("resourceid of metric."))
 @shell_utils.arg(
-    '--resource_type',
-    default=None,
+    'resource_type',
     metavar='<resource_type>',
     help=("uhosresource_typetid of metric."))
 @shell_utils.arg(
@@ -582,11 +600,7 @@ def do_umon_metric_get(cs,args):
     '''
     get metic data
     '''
-    
-    metrics=None
-    if args.metrics:
-        metrics=args.metrics.split('&')
-    result=cs.umon.metric_get(args.ucloud_region,metrics,args.resourceid,
+    result=cs.umon.metric_get(args.ucloud_region,args.metric,args.resourceid,
                               args.resource_type,args.time_range,
                               args.begin_time,args.end_time)
     _print_origin_dict(result)
@@ -624,9 +638,9 @@ def do_unet_eip_create(cs,args):
 
 @shell_utils.arg(
     '--id',
-    default=None,
     metavar='<id>',
-    help=("eip id, if more than one eip, connect them with '&', eg.ID-1&ID-2...."))
+    nargs='+',
+    help=("eip id(ids), if more than one eip"))
 @shell_utils.arg(
     '--offset',
     default=None,
@@ -641,20 +655,16 @@ def do_unet_eip_get(cs,args):
     '''
     query eip in given id/s
     '''
-    ids=None
-    
-    if args.id:
-        ids=args.id.split('&')
-    result=cs.unet.eip_get(args.ucloud_region,ids,
+
+    result=cs.unet.eip_get(args.ucloud_region,args.id,
                               args.offset,args.limit)
     _print_origin_dict(result)
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
-    help=("eip id, if more than one eip, connect them with '&', eg.ID-1&ID-2...."))
+    help=("eip id"))
 @shell_utils.arg(
     '--name',
     default=None,
@@ -885,54 +895,46 @@ def do_unet_sec_reource_get(cs,args):
 
 
 @shell_utils.arg(
-    '--name',
-    default=None,
+    'name',
     metavar='<name>',
     help=("name of security group."))
 @shell_utils.arg(
-    '--desciption',
+    'desciption',
     default=None,
     metavar='<desciption>',
     help=("desciption of security group."))
 @shell_utils.arg(
-    '--rule',
-    default=None,
+    'rule',
+    nargs='+',
     metavar='<rule>',
-    help=("rule of security group,if more than one rule,connect them with '&',"
-          "eg.UDP|53|0.0.0.0/0|ACCEPT|50&TCP|3306|0.0.0.0/0|DROP|50..."))
-def do_unet_sec_creat(cs,args):
+    help=("rule of security group,structure of a rule:'Proto|Dst_port|Src_ip|"
+          "Action|Priority' eg.UDP|53|0.0.0.0/0|ACCEPT|50T"))
+def do_unet_sec_create(cs,args):
     '''
     create security group
     '''
-    
-    rules=None
-    if args.rule:
-        rules=args.rule.split('&')
-    result=cs.unet.sec_creat(args.ucloud_region,args.name,rules,
+
+    result=cs.unet.sec_creat(args.ucloud_region,args.name,args.rule,
                              args.desciption)
     _print_action_result(result)
 
 
 @shell_utils.arg(
-    '--id',
-    default=None,
+    'id',
     metavar='<id>',
     help=("id of security group."))
 @shell_utils.arg(
-    '--rule',
-    default=None,
+    'rule',
+    nargs='+',
     metavar='<rule>',
-    help=("rule of security group,if more than one rule,connect them with '&',"
-          "eg.UDP|53|0.0.0.0/0|ACCEPT|50&TCP|3306|0.0.0.0/0|DROP|50..."))
+    help=("rule of security group,structure of a rule:'Proto|Dst_port|Src_ip|"
+          "Action|Priority' eg.UDP|53|0.0.0.0/0|ACCEPT|50T"))
 def do_unet_sec_update(cs,args):
     '''
     update security group
     '''
-    
-    rules=None
-    if args.rule:
-        rules=args.rule.split('&')
-    result=cs.unet.sec_update(args.ucloud_region,args.id,rules)
+
+    result=cs.unet.sec_update(args.ucloud_region,args.id,args.rule)
     _print_action_result(result)
 
 

@@ -1,3 +1,4 @@
+shell.py
 *.pyc
 ucloud-me.rc
 dist/

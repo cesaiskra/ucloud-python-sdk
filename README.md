@@ -1,9 +1,9 @@
-###Ucloud Python SDK and Command-Line Tool
+### Ucloud Python SDK and Command-Line Tool
 this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash env.	
 welcome to contribute to this tools.		
 feel free to contact me if you find any bugs or have good advices.
 
-####设计理念    
+#### 设计理念    
 这个项目包含python sdk 和 命令行工具,覆盖了UHOST,UNET,UMON这三大资源管理.SDK设计上也是按前面三大资源来做区分.
 由于一直有研究openstack,发现它的命令行做得很不错,所以这里命令行则是参考了openstack 命令行工具的资源管理命令,
 基本上每种资源都有以下五个操作:	
@@ -12,16 +12,16 @@ feel free to contact me if you find any bugs or have good advices.
 2. show:通过ID查询本类资源的某个创建资源的详细信息.    
 3. CUD:create, update, delete. 增删改三个操作.
 
-####特色:
+#### 特色:
 
 1. 命令可以加 "--debug" 来查看操作的关键路径的打印信息.
 2. 命令可以加 "--timming" 来获得执行命令所花费的时间.
 
-####软件查看下载:
+#### 软件查看下载:
 pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
 
 
-####1. sdk usage:
+#### 1. sdk usage:
 
 install via pip:
 	
@@ -50,7 +50,7 @@ output:
 
 
 
-####2. command-line usage:
+#### 2. command-line usage:
 使用之前,先编辑下uclud.rc文件,然后导入环境变量,接下来的命令就不用输入你的认证信息了.
 
 		hyphendeMacBook-Air:ucloud-python-sdk hyphen$ cat ucloud.rc 

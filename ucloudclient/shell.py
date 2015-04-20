@@ -273,7 +273,27 @@ class UcloudShell(object):
         ucloud_pubkey=args.ucloud_pubkey
         ucloud_prikey=args.ucloud_prikey
 
-        self.cs= client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,debug=options.debug,timing=args.timing)
+        if not ucloud_region:
+                    raise uexceptions.CommandError("You must provide region "
+                                                   "name via --ucloud_region "
+                                                   "or env[UCLOUD_REGION].")
+
+        if not ucloud_url:
+                    raise uexceptions.CommandError("You must provide url via "
+                                                   "--ucloud_url or "
+                                                   "env[UCLOUD_URL].")
+
+        if not ucloud_pubkey:
+                    raise uexceptions.CommandError("You must provide public "
+                                                   "key via --ucloud_pubkey "
+                                                    "or env[UCLOUD_PUBKEY].")
+
+        if not ucloud_prikey:
+                    raise uexceptions.CommandError("You must provide private "
+                                                   "key via --ucloud_prikey "
+                                                    "or env[UCLOUD_PRIKEY].")
+        self.cs= client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,
+                               debug=options.debug,timing=args.timing)
 
         args.func(self.cs, args)
 

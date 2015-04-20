@@ -1,3 +1,7 @@
+class CommandError(Exception):
+    pass
+
+
 class UCLOUDException(Exception):
     def __str__(self):
         return "Error"

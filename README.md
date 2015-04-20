@@ -1,5 +1,7 @@
 ### Ucloud Python SDK and Command-Line Tool
-this is a python sdk for ucloud,as well as a CLI tools for ucloud in linux bash env.	
+UcloudClient is a python sdk and a command-line client for Ucloud that brings
+the command set for Uhost, Unet, Umon APIs together in a single shell with a
+uniform command structure.
 welcome to contribute to this tools.		
 feel free to contact me if you find any bugs or have good advices.
 

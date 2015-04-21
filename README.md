@@ -19,6 +19,10 @@ feel free to contact me if you find any bugs or have good advices.
 1. 命令可以加 "--debug" 来查看操作的关键路径的打印信息.
 2. 命令可以加 "--timming" 来获得执行命令所花费的时间.
 
+#### Unit Test:
+已经完成命令行工具的unit test.主要使用了testtools,mock,fixtures等第三方模块.
+依赖请查看teset-requirements.txt.
+
 #### 软件查看下载:
 pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
 

@@ -20,7 +20,7 @@ feel free to contact me if you find any bugs or have good advices.
 2. 命令可以加 "--timming" 来获得执行命令所花费的时间.
 
 #### Unit Test:
-已经完成命令行工具的unit test.主要使用了testtools,mock,fixtures等第三方模块.
+已经完成shell,client,HTTPClient的unit test.主要使用了testtools,mock,fixtures等第三方模块.
 依赖请查看teset-requirements.txt.
 
 #### 软件查看下载:
@@ -36,8 +36,9 @@ install via pip:
 example codes:
 
         from ucloudclient.client import Client as uclient
-        cl=uclient(base_url, public_key, private_key)
-        print cl.uhost.get(region="us-west-01")
+        cl = uclient(base_url, public_key, private_key)
+        uhosts = cl.uhost.get(region="us-west-01")
+        print uhosts
 
 output:
 

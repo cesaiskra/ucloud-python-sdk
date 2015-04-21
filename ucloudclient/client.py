@@ -21,6 +21,10 @@ class Client(object):
         self.client= base.HTTPClient(base_url,debug,timing)
 
 
-    def get_timings(self):
+    def get_timing(self):
         return self.client.get_timing()
+
+
+    def reset_timing(self):
+        self.client.reset_timing()
 

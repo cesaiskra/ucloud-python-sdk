@@ -15,7 +15,7 @@ from ucloudclient import uexceptions
 
 class HTTPClient(object):
 
-    def __init__(self, base_url,debug,timing):
+    def __init__(self, base_url,debug=None,timing=None):
         self.base_url = base_url
         self.timing=timing
         self.debug=debug
@@ -32,6 +32,10 @@ class HTTPClient(object):
 
     def get_timing(self):
         return self.time
+
+
+    def reset_timing(self):
+        self.time = []
 
 
     def get(self, resouse, params):

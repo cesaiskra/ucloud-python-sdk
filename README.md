@@ -26,6 +26,8 @@ feel free to contact me if you find any bugs or have good advices.
 #### 软件查看下载:
 pypi: [https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
 
+#### 贡献：
+代码遵守PEP8风格。
 
 #### 1. sdk usage:
 

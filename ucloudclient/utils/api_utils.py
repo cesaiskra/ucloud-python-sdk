@@ -23,7 +23,7 @@ def get_token(private_key, params):
     items = params.items()
     items.sort()
 
-    params_data = "";
+    params_data = ""
     for key, value in items:
         params_data = params_data + str(key) + str(value)
     params_data = params_data + str(private_key)

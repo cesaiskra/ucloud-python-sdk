@@ -6,7 +6,8 @@ class UnetManager(base.Manager):
     monitor manager class
     '''
 
-    def metric_get(self, region, metric_names, resourceid, resource_type, time_range=None,
+    def metric_get(self, region, metric_names, resourceid, resource_type,
+                   time_range=None,
                    begin_time=None, end_time=None):
         '''
         get metric

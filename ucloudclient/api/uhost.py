@@ -6,8 +6,10 @@ class UhostManager(base.Manager):
     host manager class
     '''
 
-    def create(self, region, imageid, loginmode, password=None, keypair=None, cpu=None, memory=None,
-               diskspace=None, name=None, networkid=None, securitygroupid=None, chargetype=None, quantity=None):
+    def create(self, region, imageid, loginmode, password=None, keypair=None,
+               cpu=None, memory=None, diskspace=None, name=None,
+               networkid=None, securitygroupid=None, chargetype=None,
+               quantity=None):
         '''
         boot an instance
         :param region:
@@ -53,7 +55,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def get(self, region, uhostids=None, offset=None, limit=None):
         '''
         query host in given region or given host id
@@ -76,7 +77,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def terminate(self, region, uhostid):
         '''
         terminate a host
@@ -90,7 +90,6 @@ class UhostManager(base.Manager):
         body['UHostId'] = uhostid
 
         return self._get(body)
-
 
     def resize(self, region, uhostid, cpu, memory, diskspace):
         '''
@@ -115,8 +114,8 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
-    def reinstall(self, region, uhostid, password=None, imageid=None, reservedisk=None):
+    def reinstall(self, region, uhostid, password=None, imageid=None,
+                  reservedisk=None):
         '''
         reinstall an instance
         :param region:
@@ -139,7 +138,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def start(self, region, uhostid):
         '''
         start an instance
@@ -153,7 +151,6 @@ class UhostManager(base.Manager):
         body['Action'] = 'StartUHostInstance'
 
         return self._get(body)
-
 
     def stop(self, region, uhostid):
         '''
@@ -169,7 +166,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def reboot(self, region, uhostid):
         '''
         reboot an instance
@@ -183,7 +179,6 @@ class UhostManager(base.Manager):
         body['Action'] = 'RebootUHostInstance'
 
         return self._get(body)
-
 
     def reset_password(self, region, uhostid, password):
         '''
@@ -201,7 +196,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def modify_name(self, region, uhostid, name):
         '''
         modify name of an given instance
@@ -218,7 +212,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def modify_tag(self, region, uhostid, tag):
         '''
         modify tag of an given instance
@@ -234,7 +227,6 @@ class UhostManager(base.Manager):
         body['Tag'] = tag
 
         return self._get(body)
-
 
     def get_price(self, region, imageid, cpu, memory, count, charge_type=None,
                   disk_space=None):
@@ -263,7 +255,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def get_vnc(self, region, uhostid):
         '''
         get vnc info for a given instance
@@ -277,7 +268,6 @@ class UhostManager(base.Manager):
         body['Action'] = 'GetUHostInstanceVncInfo'
 
         return self._get(body)
-
 
     def get_image(self, region, image_type=None, os_type=None, image_id=None,
                   offset=None, limit=None):
@@ -307,8 +297,8 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
-    def create_image(self, region, uhostid, image_name, image_description=None):
+    def create_image(self, region, uhostid, image_name,
+                     image_description=None):
         '''
         create by given instance
         :param region:
@@ -327,7 +317,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def delete_image(self, region, imageid):
         '''
         delete custom image
@@ -341,7 +330,6 @@ class UhostManager(base.Manager):
         body['ImageId'] = imageid
 
         return self._get(body)
-
 
     def attach_disk(self, region, uhostid, udiskid):
         '''
@@ -359,7 +347,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def detach_disk(self, region, uhostid, udiskid):
         '''
         detach a disk from an instance
@@ -376,7 +363,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def create_snapshot(self, region, uhostid):
         '''
         take a snapshot of an instance
@@ -390,7 +376,6 @@ class UhostManager(base.Manager):
         body['Action'] = 'CreateUHostInstanceSnapshot'
 
         return self._get(body)
-
 
     def list_snapshot(self, region, uhostid):
         '''

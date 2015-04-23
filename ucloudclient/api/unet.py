@@ -7,7 +7,8 @@ class UnetManager(base.Manager):
     net manager class
     '''
 
-    def eip_create(self, region, operator_name, bandwidth, charge_type=None, quantity=None):
+    def eip_create(self, region, operator_name, bandwidth, charge_type=None,
+                   quantity=None):
         '''
         create an eip
         :param region:
@@ -29,7 +30,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def eip_get(self, region, eipids=None, offset=None, limit=None):
         '''
         query eip in given id
@@ -47,7 +47,6 @@ class UnetManager(base.Manager):
                 body['UHostIds.' + str(i)] = eipids[i]
 
         return self._get(body)
-
 
     def eip_update(self, region, eipid, name=None, tag=None, remark=None):
         '''
@@ -74,7 +73,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def eip_release(self, region, eipid):
         '''
         release an eip
@@ -88,7 +86,6 @@ class UnetManager(base.Manager):
         body['EIPId'] = eipid
 
         return self._get(body)
-
 
     def eip_bind(self, region, eipid, resource_type, resourceid):
         '''
@@ -108,7 +105,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def eip_unbind(self, region, eipid, resource_type, resourceid):
         '''
         unbind ip to given resource
@@ -127,7 +123,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def eip_bandwidth_modify(self, region, eipid, bandwidth):
         '''
         modify bandwidth of a given eip
@@ -143,7 +138,6 @@ class UnetManager(base.Manager):
         body['Bandwidth'] = bandwidth
 
         return self._get(body)
-
 
     def eip_weight_modify(self, region, eipid, weight):
         '''
@@ -161,8 +155,8 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
-    def eip_price_get(self, region, operator_name, bandwidth, charge_type=None):
+    def eip_price_get(self, region, operator_name, bandwidth,
+                      charge_type=None):
         '''
         get eip price
         :param region:
@@ -181,7 +175,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def vip_allocate(self, region, count=None):
         '''
         allocate a vip
@@ -197,7 +190,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def vip_get(self, region):
         '''
         list all vip
@@ -209,7 +201,6 @@ class UnetManager(base.Manager):
         body['Action'] = 'DescribeVIP'
 
         return self._get(body)
-
 
     def vip_release(self, region, vip):
         '''
@@ -225,8 +216,8 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
-    def sec_get(self, region, resourcetype=None, resourceid=None, groupid=None):
+    def sec_get(self, region, resourcetype=None, resourceid=None,
+                groupid=None):
         '''
         get security group info
         :param region:
@@ -247,7 +238,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def sec_reource_get(self, region, groupid=None):
         '''
         get resource attached to given security group
@@ -262,7 +252,6 @@ class UnetManager(base.Manager):
             body['GroupId'] = groupid
 
         return self._get(body)
-
 
     def sec_creat(self, region, group_name, rules, description=None):
         '''
@@ -285,7 +274,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def sec_update(self, region, groupid, rules):
         '''
         update given security group
@@ -304,7 +292,6 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-
     def sec_grant(self, region, groupid, resource_type, resourceid):
         '''
         grant given security group to specified resource
@@ -322,7 +309,6 @@ class UnetManager(base.Manager):
         body['ResourceId'] = resourceid
 
         return self._get(body)
-
 
     def sec_delete(self, region, groupid):
         '''

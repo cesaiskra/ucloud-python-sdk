@@ -21,26 +21,24 @@ class HTTPClient(object):
         self.time = []
         o = urlparse.urlsplit(base_url)
         if o.scheme == 'https':
-            self.conn = httplib.HTTPSConnection(o.netloc);
+            self.conn = httplib.HTTPSConnection(o.netloc)
         else:
-            self.conn = httplib.HTTPConnection(o.netloc);
+            self.conn = httplib.HTTPConnection(o.netloc)
 
     def __del__(self):
         self.conn.close()
 
-
     def get_timing(self):
         return self.time
-
 
     def reset_timing(self):
         self.time = []
 
-
     def get(self, resouse, params):
         resouse += "?" + urllib.urlencode(params)
         if self.debug:
-            print("DEBUG START>>>>\nRequest: %s%s\n" % (self.base_url, resouse))
+            print("DEBUG START>>>>\nRequest: %s%s\n" %
+                  (self.base_url, resouse))
         response = None
 
         try:
@@ -60,15 +58,18 @@ class HTTPClient(object):
             response = json.loads(respones_raw)
             if self.debug:
                 print(
-                    "Respone: %s\n<<<<DEBUG END\n" % json.dumps(response, encoding='UTF-8', ensure_ascii=False,
-                                                                indent=2))
+                    "Respone: %s\n<<<<DEBUG END\n" %
+                    json.dumps(response, encoding='UTF-8', ensure_ascii=False,
+                               indent=2))
 
         except Exception as e:
             raise uexceptions.NoJsonFound(e)
 
         if response.get('RetCode') != 0:
             print('Message:%(Message)s\nRetCode:%(RetCode)s' % response)
-            raise uexceptions.BadParameters("message: %s /n bad parameters:%s" % (response.get('Message'), params))
+            raise uexceptions.BadParameters("message: %s /n bad parameters:%s"
+                                            % (response.get('Message'),
+                                               params))
         return response
 
 

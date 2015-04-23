@@ -66,11 +66,14 @@ def _print_host(d):
     # u'DiskId': u'ce3b1751-d837-4949-9c73-29368b7fe820',
     # u'Size': 20}], u'IPSet': [{u'IP': u'10.11.1.126', u'Type': u'Private'},
     # {u'IPId': u'eip-yci4qr', u'IP': u'107.150.97.103', u'Bandwidth': 2,
-    #     u'Type': u'International'}], u'CPU': 1, u'State': u'Running',
-    #     u'BasicImageId': u'uimage-nhwrqn', u'ImageId': u'ce3b1751-d837-4949-9c73-29368b7fe820',
-    #     u'ExpireTime': 1429632272, u'UHostType': u'Normal', u'UHostId': u'uhost-4dmzop',
-    #     u'NetworkState': u'Connected', u'ChargeType': u'Month', u'Memory': 2048,
-    #     u'OsType': u'Linux', u'CreateTime': 1426953872, u'BasicImageName': u'Ubuntu 14.04 64\u4f4d'}
+    # u'Type': u'International'}], u'CPU': 1, u'State': u'Running',
+    # u'BasicImageId': u'uimage-nhwrqn', u'ImageId': u'ce3b1751-d837-4949-9c7
+    # 3-29368b7fe820',
+    # u'ExpireTime': 1429632272, u'UHostType': u'Normal', u'UHostId': u'uhost
+    #   -4dmzop',
+    # u'NetworkState': u'Connected', u'ChargeType': u'Month', u'Memory': 2048,
+    # u'OsType': u'Linux', u'CreateTime': 1426953872, u'BasicImageName':
+    #   u'Ubuntu 14.04 64\u4f4d'}
     # import pdb
     # pdb.set_trace()
     disk_set = d.pop('DiskSet')
@@ -86,7 +89,9 @@ def _print_host(d):
         exp = ''
         if exp_time:
             exp = " Exp:" + str(api_utils.get_formate_time(exp_time))
-        disk_detail = "%s %dGB Type:%s ID:%s %s" % (disk['Drive'], disk['Size'], disk['Type'], disk['DiskId'], exp)
+        disk_detail = "%s %dGB Type:%s ID:%s %s" % \
+                      (disk['Drive'], disk['Size'], disk['Type'],
+                       disk['DiskId'], exp)
         d['Disk_%d' % i] = disk_detail
     for j in range(len(ip_set)):
         ip = ip_set[j]
@@ -204,7 +209,8 @@ def do_uhost_list(cs, args):
     list  uhosts
     '''
 
-    uhosts = cs.uhost.get(args.ucloud_region, offset=args.offset, limit=args.limit).get('UHostSet')
+    uhosts = cs.uhost.get(args.ucloud_region, offset=args.offset,
+                          limit=args.limit).get('UHostSet')
     shell_utils.print_list(uhosts, ['Name', 'UHostId', 'Tag', 'State',
                                     'BasicImageName'])
 
@@ -304,7 +310,8 @@ def do_uhost_reinstall(cs, args):
     reinstall a host
     '''
 
-    result = cs.uhost.reinstall(args.ucloud_region, args.uhostid, args.password,
+    result = cs.uhost.reinstall(args.ucloud_region, args.uhostid,
+                                args.password,
                                 args.imageid, args.reservedisk)
     _print_action_result(result)
 
@@ -322,7 +329,8 @@ def do_uhost_reset_password(cs, args):
     reset a host's password
     '''
 
-    result = cs.uhost.reset_password(args.ucloud_region, args.uhostid, args.password)
+    result = cs.uhost.reset_password(args.ucloud_region, args.uhostid,
+                                     args.password)
     _print_action_result(result)
 
 
@@ -368,8 +376,8 @@ def do_uhost_image_list(cs, args):
     '''
     list all images
     '''
-    images = cs.uhost.get_image(args.ucloud_region, args.imagetype, args.ostype,
-                                args.imageid, args.offset,
+    images = cs.uhost.get_image(args.ucloud_region, args.imagetype,
+                                args.ostype, args.imageid, args.offset,
                                 args.limit).get('ImageSet')
     shell_utils.print_list(images, ['ImageId', 'ImageName', 'OsType'])
 
@@ -383,7 +391,8 @@ def do_uhost_image_show(cs, args):
     '''
     show image details
     '''
-    images = cs.uhost.get_image(args.ucloud_region, image_id=args.imageid).get('ImageSet')[0]
+    images = cs.uhost.get_image(args.ucloud_region,
+                                image_id=args.imageid).get('ImageSet')[0]
     _print_dict(images)
 
 
@@ -495,8 +504,8 @@ def do_uhost_create_image(cs, args):
     create an image from a given host
     '''
 
-    result = cs.uhost.create_image(args.ucloud_region, args.uhostid, args.imageid,
-                                   args.image_desc)
+    result = cs.uhost.create_image(args.ucloud_region, args.uhostid,
+                                   args.imageid, args.image_desc)
     _print_action_result(result)
 
 
@@ -526,7 +535,8 @@ def do_uhost_attach_disk(cs, args):
     attach a disk to a host
     '''
 
-    result = cs.uhost.attach_disk(args.ucloud_region, args.uhostid, args.udiskid)
+    result = cs.uhost.attach_disk(args.ucloud_region, args.uhostid,
+                                  args.udiskid)
     _print_action_result(result)
 
 
@@ -543,7 +553,8 @@ def do_uhost_detach_disk(cs, args):
     attach a disk to a host
     '''
 
-    result = cs.uhost.detach_disk(args.ucloud_region, args.uhostid, args.udiskid)
+    result = cs.uhost.detach_disk(args.ucloud_region, args.uhostid,
+                                  args.udiskid)
     _print_action_result(result)
 
 
@@ -604,9 +615,10 @@ def do_umon_metric_get(cs, args):
     '''
     get metic data
     '''
-    result = cs.umon.metric_get(args.ucloud_region, args.metric, args.resourceid,
-                                args.resource_type, args.time_range,
-                                args.begin_time, args.end_time)
+    result = cs.umon.metric_get(args.ucloud_region, args.metric,
+                                args.resourceid, args.resource_type,
+                                args.time_range, args.begin_time,
+                                args.end_time)
     _print_origin_dict(result)
 
 
@@ -634,7 +646,8 @@ def do_unet_eip_create(cs, args):
     '''
 
     result = cs.unet.eip_create(args.ucloud_region, args.operator_name,
-                                args.bandwidth, args.charge_type, args.quantity)
+                                args.bandwidth, args.charge_type,
+                                args.quantity)
     _print_origin_dict(result)
 
 
@@ -658,7 +671,8 @@ def do_unet_eip_list(cs, args):
     for eip in result:
         ip = eip.get('EIPAddr')[0]
         eip.update(ip)
-    shell_utils.print_list(result, ['Name', 'EIPId', 'Bandwidth', 'IP', 'OperatorName'])
+    shell_utils.print_list(result, ['Name', 'EIPId', 'Bandwidth', 'IP',
+                                    'OperatorName'])
 
 
 @shell_utils.arg(
@@ -884,7 +898,8 @@ def do_unet_sec_show(cs, args):
     get security group details info.
     '''
 
-    result = cs.unet.sec_get(args.ucloud_region, groupid=args.id).get('DataSet')
+    result = cs.unet.sec_get(args.ucloud_region,
+                             groupid=args.id).get('DataSet')
     _print_origin_dict(result)
 
 

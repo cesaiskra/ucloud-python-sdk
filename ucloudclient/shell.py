@@ -93,7 +93,6 @@ class UcloudShell(object):
         parser.set_defaults(ucloud_pubkey=os.environ.get('UCLOUD_PUBKEY'))
         parser.set_defaults(ucloud_prikey=os.environ.get('UCLOUD_PRIKEY'))
 
-
     def get_base_parser(self):
         '''
         get cli parser
@@ -156,7 +155,6 @@ class UcloudShell(object):
         logging.basicConfig(level=logging.DEBUG,
                             format=streamformat)
 
-
     @shell_utils.arg(
         'command',
         metavar='<subcommand>',
@@ -170,11 +168,10 @@ class UcloudShell(object):
             if args.command in self.subcommands:
                 self.subcommands[args.command].print_help()
             else:
-                raise uexceptions.CommandError(("'%s' is not a valid subcommand") %
-                                               args.command)
+                raise uexceptions.CommandError(("'%s' is not a valid "
+                                                "subcommand") % args.command)
         else:
             self.parser.print_help()
-
 
     def do_bash_completion(self, _args):
         """
@@ -191,7 +188,6 @@ class UcloudShell(object):
         commands.remove('bash-completion')
         commands.remove('bash_completion')
         print(' '.join(commands | options))
-
 
     def _find_actions(self, subparsers, actions_module):
         for attr in (a for a in dir(actions_module) if a.startswith('do_')):
@@ -218,7 +214,6 @@ class UcloudShell(object):
                 subparser.add_argument(*args, **kwargs)
             subparser.set_defaults(func=callback)
 
-
     def _add_bash_completion_subparser(self, subparsers):
         subparser = subparsers.add_parser(
             'bash_completion',
@@ -227,7 +222,6 @@ class UcloudShell(object):
         )
         self.subcommands['bash_completion'] = subparser
         subparser.set_defaults(func=self.do_bash_completion)
-
 
     def get_subcommand_parser(self):
         parser = self.get_base_parser()
@@ -243,7 +237,6 @@ class UcloudShell(object):
         self._add_bash_completion_subparser(subparsers)
 
         return parser
-
 
     def main(self, argv):
         '''
@@ -304,17 +297,19 @@ class UcloudShell(object):
             self._dump_timings(self.times + self.cs.get_timings())
 
     def _dump_timings(self, timing):
-        results = [{'url': url, 'seconds': end - start} for url, start, end in timing]
+        results = [{'url': url, 'seconds': end - start} for url, start, end
+                   in timing]
         total = 0.0
         for tyme in results:
             total += tyme.get('seconds')
         results.append({"Total": total})
-        # if a command contain more than one http request, we can type trace of
+        # if command contain more than one http request, we can type trace of
         # each request with time info.
-        # shell_utils.print_list(results, ["url", "seconds"], sortby_index=None)
+        # shell_utils.print_list(results,["url","seconds"], sortby_index=None)
 
-        # if a command only contain one http request, just type the total seconds.
-        print("\nTiming>>>>\nThis Command Spent %s Seconds to Finish the HTTP request.\n" % total)
+        # if command only contain one http request, type the total seconds.
+        print("\nTiming>>>>\nThis Command Spent %s Seconds to Finish the HTTP "
+              "request.\n" % total)
 
 
 def main():

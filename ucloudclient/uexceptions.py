@@ -11,6 +11,7 @@ class ConnectionRefused(Exception):
     """
     Connection refused: the server refused the connection.
     """
+
     def __init__(self, response=None):
         self.response = response
 
@@ -22,6 +23,7 @@ class NoJsonFound(Exception):
     """
     no json object was found
     """
+
     def __init__(self, response=None):
         self.response = response
 
@@ -33,6 +35,7 @@ class BadParameters(Exception):
     """
     no value return since bad parameters
     """
+
     def __init__(self, response=None):
         self.response = response
 

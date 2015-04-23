@@ -1,29 +1,29 @@
 __author__ = 'hyphen'
-from testtools import TestCase
-from testtools import matchers
-import fixtures
 import mock
 import re
 import sys
+
+from testtools import TestCase
+from testtools import matchers
+import fixtures
 import six
 
 from ucloudclient import uexceptions
 import ucloudclient.shell
 
 
-FAKE_ENV = {'UCLOUD_REGION':"cn-north-03",
-            'UCLOUD_URL':"https://api.ucloud.cn",
-            'UCLOUD_PUBKEY':"asdf",
-            'UCLOUD_PRIKEY':"asdf"}
+FAKE_ENV = {'UCLOUD_REGION': "cn-north-03",
+            'UCLOUD_URL': "https://api.ucloud.cn",
+            'UCLOUD_PUBKEY': "asdf",
+            'UCLOUD_PRIKEY': "asdf"}
 
-FAKE_ENV2 = {'UCLOUD_REGION':"cn-north-03",
-            'UCLOUD_URL':"https://api.ucloud.cn",
-            'UCLOUD_PUBKEY':"asdf",
-            'UCLOUD_PRIKEY':"asdf"}
+FAKE_ENV2 = {'UCLOUD_REGION': "cn-north-03",
+             'UCLOUD_URL': "https://api.ucloud.cn",
+             'UCLOUD_PUBKEY': "asdf",
+             'UCLOUD_PRIKEY': "asdf"}
 
 
 class ParserTest(TestCase):
-
     def setUp(self):
         super(ParserTest, self).setUp()
         self.parser = ucloudclient.shell.UcloudClientArgumentParser()
@@ -48,20 +48,19 @@ class ParserTest(TestCase):
 
 
 class ShellTest(TestCase):
-
     _msg_no_region = ("You must provide region name via --ucloud_region "
-                              "or env[UCLOUD_REGION].")
+                      "or env[UCLOUD_REGION].")
     _msg_no_url = ("You must provide url via --ucloud_url "
-                              "or env[UCLOUD_URL].")
+                   "or env[UCLOUD_URL].")
     _msg_no_public_key = ("You must provide public key via --ucloud_pubkey "
-                              "or env[UCLOUD_PUBKEY].")
+                          "or env[UCLOUD_PUBKEY].")
     _msg_no_private_key = ("You must provide private key via --ucloud_prikey "
-                              "or env[UCLOUD_PRIKEY].")
+                           "or env[UCLOUD_PRIKEY].")
     _msg_help = [
-            '.*?^usage: ucloud',
-            '.*?^\s+uhost-image-show\s+show image details',
-            '.*?^See "ucloud help COMMAND" for help on a specific command.',
-        ]
+        '.*?^usage: ucloud',
+        '.*?^\s+uhost-image-show\s+show image details',
+        '.*?^See "ucloud help COMMAND" for help on a specific command.',
+    ]
 
     def make_env(self, exclude=None, fake_env=FAKE_ENV):
         env = dict((k, v) for k, v in fake_env.items() if k != exclude)
@@ -70,8 +69,8 @@ class ShellTest(TestCase):
     def setUp(self):
         super(ShellTest, self).setUp()
         self.useFixture(fixtures.MonkeyPatch(
-                        'ucloudclient.client.get_client_class',
-                        mock.MagicMock))
+            'ucloudclient.client.get_client_class',
+            mock.MagicMock))
 
     def shell(self, argstr, exitcodes=(0,)):
         orig = sys.stdout

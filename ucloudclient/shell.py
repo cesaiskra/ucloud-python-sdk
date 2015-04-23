@@ -16,7 +16,9 @@ from utils import shell_utils
 import client
 import uexceptions
 
+
 logger = logging.getLogger(__name__)
+
 
 class UcloudClientArgumentParser(argparse.ArgumentParser):
     '''
@@ -36,7 +38,7 @@ class UcloudClientArgumentParser(argparse.ArgumentParser):
         choose_from = ' (choose from'
         progparts = self.prog.partition(' ')
         self.exit(2, ("error: %(errmsg)s\nTry '%(mainp)s help %(subp)s'"
-                       " for more information.\n") %
+                      " for more information.\n") %
                   {'errmsg': message.split(choose_from)[0],
                    'mainp': progparts[0],
                    'subp': progparts[2]})
@@ -63,10 +65,11 @@ class UcloudHelpFormatter(argparse.HelpFormatter):
     '''
     shell help.
     '''
+
     def __init__(self, prog, indent_increment=2, max_help_position=32,
                  width=None):
         super(UcloudHelpFormatter, self).__init__(prog, indent_increment,
-                                                     max_help_position, width)
+                                                  max_help_position, width)
 
     def start_section(self, heading):
         heading = '%s%s' % (heading[0].upper(), heading[1:])
@@ -77,9 +80,9 @@ class UcloudShell(object):
     '''
     main shell class
     '''
-    times=[]
+    times = []
 
-    def _append_env_args(self,parser):
+    def _append_env_args(self, parser):
         '''
         append env args to cli parser
         :param parser:
@@ -168,7 +171,7 @@ class UcloudShell(object):
                 self.subcommands[args.command].print_help()
             else:
                 raise uexceptions.CommandError(("'%s' is not a valid subcommand") %
-                                       args.command)
+                                               args.command)
         else:
             self.parser.print_help()
 
@@ -242,7 +245,7 @@ class UcloudShell(object):
         return parser
 
 
-    def main(self,argv):
+    def main(self, argv):
         '''
 
         :param argv:
@@ -268,32 +271,32 @@ class UcloudShell(object):
             self.do_bash_completion(args)
             return 0
 
-        ucloud_region=args.ucloud_region
-        ucloud_url=args.ucloud_url
-        ucloud_pubkey=args.ucloud_pubkey
-        ucloud_prikey=args.ucloud_prikey
+        ucloud_region = args.ucloud_region
+        ucloud_url = args.ucloud_url
+        ucloud_pubkey = args.ucloud_pubkey
+        ucloud_prikey = args.ucloud_prikey
 
         if not ucloud_region:
-                    raise uexceptions.CommandError("You must provide region "
-                                                   "name via --ucloud_region "
-                                                   "or env[UCLOUD_REGION].")
+            raise uexceptions.CommandError("You must provide region "
+                                           "name via --ucloud_region "
+                                           "or env[UCLOUD_REGION].")
 
         if not ucloud_url:
-                    raise uexceptions.CommandError("You must provide url via "
-                                                   "--ucloud_url or "
-                                                   "env[UCLOUD_URL].")
+            raise uexceptions.CommandError("You must provide url via "
+                                           "--ucloud_url or "
+                                           "env[UCLOUD_URL].")
 
         if not ucloud_pubkey:
-                    raise uexceptions.CommandError("You must provide public "
-                                                   "key via --ucloud_pubkey "
-                                                    "or env[UCLOUD_PUBKEY].")
+            raise uexceptions.CommandError("You must provide public "
+                                           "key via --ucloud_pubkey "
+                                           "or env[UCLOUD_PUBKEY].")
 
         if not ucloud_prikey:
-                    raise uexceptions.CommandError("You must provide private "
-                                                   "key via --ucloud_prikey "
-                                                    "or env[UCLOUD_PRIKEY].")
-        self.cs= client.Client(ucloud_url,ucloud_pubkey,ucloud_prikey,
-                               debug=options.debug,timing=args.timing)
+            raise uexceptions.CommandError("You must provide private "
+                                           "key via --ucloud_prikey "
+                                           "or env[UCLOUD_PRIKEY].")
+        self.cs = client.Client(ucloud_url, ucloud_pubkey, ucloud_prikey,
+                                debug=options.debug, timing=args.timing)
 
         args.func(self.cs, args)
 
@@ -301,26 +304,22 @@ class UcloudShell(object):
             self._dump_timings(self.times + self.cs.get_timings())
 
     def _dump_timings(self, timing):
-        results = [{'url':url,'seconds':end-start} for url, start, end in timing]
+        results = [{'url': url, 'seconds': end - start} for url, start, end in timing]
         total = 0.0
         for tyme in results:
             total += tyme.get('seconds')
         results.append({"Total": total})
-        #if a command contain more than one http request, we can type trace of
+        # if a command contain more than one http request, we can type trace of
         # each request with time info.
         # shell_utils.print_list(results, ["url", "seconds"], sortby_index=None)
 
-        #if a command only contain one http request, just type the total seconds.
-        print("\nTiming>>>>\nThis Command Spent %s Seconds to Finish the HTTP request.\n"%total)
-
-
-
+        # if a command only contain one http request, just type the total seconds.
+        print("\nTiming>>>>\nThis Command Spent %s Seconds to Finish the HTTP request.\n" % total)
 
 
 def main():
-
     try:
-        argv=[a for a in sys.argv[1:]]
+        argv = [a for a in sys.argv[1:]]
         UcloudShell().main(argv)
 
     except Exception as e:

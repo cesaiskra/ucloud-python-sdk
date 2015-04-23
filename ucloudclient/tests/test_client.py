@@ -1,14 +1,9 @@
 from testtools import TestCase
-from mock import patch
 
-import fixtures
-import mock
-
-from ucloudclient.utils import base
 from ucloudclient import client
 
-class ClientTest(TestCase):
 
+class ClientTest(TestCase):
     def test_client_get_reset_timings(self):
         cs = client.Client('base_url', 'public_key', 'private_key')
         self.assertEqual(0, len(cs.get_timing()))

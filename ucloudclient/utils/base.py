@@ -1,4 +1,4 @@
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 import json
 import httplib
 import urlparse
@@ -14,12 +14,11 @@ from ucloudclient import uexceptions
 
 
 class HTTPClient(object):
-
-    def __init__(self, base_url,debug=None,timing=None):
+    def __init__(self, base_url, debug=None, timing=None):
         self.base_url = base_url
-        self.timing=timing
-        self.debug=debug
-        self.time=[]
+        self.timing = timing
+        self.debug = debug
+        self.time = []
         o = urlparse.urlsplit(base_url)
         if o.scheme == 'https':
             self.conn = httplib.HTTPSConnection(o.netloc);
@@ -42,7 +41,7 @@ class HTTPClient(object):
         resouse += "?" + urllib.urlencode(params)
         if self.debug:
             print("DEBUG START>>>>\nRequest: %s%s\n" % (self.base_url, resouse))
-        response=None
+        response = None
 
         try:
             if self.timing:
@@ -50,37 +49,38 @@ class HTTPClient(object):
             self.conn.request("GET", resouse)
             if self.timing:
                 self.time.append(("%s %s" % ('GET', resouse),
-                               start_time, time.time()))
+                                  start_time, time.time()))
 
         except Exception as e:
             raise uexceptions.ConnectionRefused(e)
 
-        respones_raw=self.conn.getresponse().read()
+        respones_raw = self.conn.getresponse().read()
 
         try:
             response = json.loads(respones_raw)
             if self.debug:
-                print("Respone: %s\n<<<<DEBUG END\n"%json.dumps(response, encoding='UTF-8', ensure_ascii=False,indent=2))
+                print(
+                    "Respone: %s\n<<<<DEBUG END\n" % json.dumps(response, encoding='UTF-8', ensure_ascii=False,
+                                                                indent=2))
 
         except Exception as e:
             raise uexceptions.NoJsonFound(e)
 
-        if response.get('RetCode')!=0:
-            print('Message:%(Message)s\nRetCode:%(RetCode)s'%response)
-            raise uexceptions.BadParameters("message: %s /n bad parameters:%s"%(response.get('Message'),params))
+        if response.get('RetCode') != 0:
+            print('Message:%(Message)s\nRetCode:%(RetCode)s' % response)
+            raise uexceptions.BadParameters("message: %s /n bad parameters:%s" % (response.get('Message'), params))
         return response
 
 
 class Manager(object):
-    def __init__(self,api):
-        self.api=api
+    def __init__(self, api):
+        self.api = api
 
     def _get(self, body):
-        body['PublicKey']=self.api.public_key
-        token= api_utils.get_token(self.api.private_key,body)
-        body['Signature']=token
-        return self.api.client.get('/',body)
-
+        body['PublicKey'] = self.api.public_key
+        token = api_utils.get_token(self.api.private_key, body)
+        body['Signature'] = token
+        return self.api.client.get('/', body)
 
 
 class CompletionCache(object):
@@ -99,6 +99,7 @@ class CompletionCache(object):
                 <resource>-id-cache
                 <resource>-human-id-cache
     """
+
     def __init__(self, pubkey, url, attributes=('id', 'human_id')):
         self.directory = self._make_directory_name(pubkey, url)
         self.attributes = attributes
@@ -110,7 +111,7 @@ class CompletionCache(object):
         uniqifier = hashlib.md5(username.encode('utf-8') +
                                 auth_url.encode('utf-8')).hexdigest()
         base_dir = os.environ.get('UCLOUDCLIENT_UUID_CACHE_DIR',
-                                default="~/.ucloudclient")
+                                  default="~/.ucloudclient")
         return os.path.expanduser(os.path.join(base_dir, uniqifier))
 
     def _prepare_directory(self):

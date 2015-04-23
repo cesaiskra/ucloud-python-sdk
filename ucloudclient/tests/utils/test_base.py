@@ -1,13 +1,12 @@
-from testtools import TestCase
 import mock
+
+from testtools import TestCase
 
 from ucloudclient.utils import base
 from ucloudclient import client
 
 
 class HTTPClientTest(TestCase):
-
-
     @mock.patch('ucloudclient.utils.base.HTTPClient')
     def test_contextmanager(self, mock_http_client):
         client.Client('base_url', 'public_key', 'private_key')

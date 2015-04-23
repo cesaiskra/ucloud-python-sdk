@@ -1,12 +1,13 @@
 from ucloudclient import uexceptions
 from ucloudclient.utils import base
 
+
 class UnetManager(base.Manager):
     '''
     net manager class
     '''
 
-    def eip_create(self,region,operator_name,bandwidth,charge_type=None,quantity=None):
+    def eip_create(self, region, operator_name, bandwidth, charge_type=None, quantity=None):
         '''
         create an eip
         :param region:
@@ -16,20 +17,20 @@ class UnetManager(base.Manager):
         :param quantity:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='AllocateEIP'
-        body['OperatorName']=operator_name
-        body['Bandwidth']=bandwidth
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'AllocateEIP'
+        body['OperatorName'] = operator_name
+        body['Bandwidth'] = bandwidth
         if charge_type:
-            body['ChargeType']=charge_type
+            body['ChargeType'] = charge_type
         if quantity:
-            body['Quantity']=quantity
+            body['Quantity'] = quantity
 
         return self._get(body)
 
 
-    def eip_get(self,region,eipids=None,offset=None,limit=None):
+    def eip_get(self, region, eipids=None, offset=None, limit=None):
         '''
         query eip in given id
         :param region:
@@ -38,17 +39,17 @@ class UnetManager(base.Manager):
         :param limit:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']="DescribeEIP"
+        body = {}
+        body['Region'] = region
+        body['Action'] = "DescribeEIP"
         if eipids:
             for i in range(len(eipids)):
-                body['UHostIds.'+str(i)]=eipids[i]
+                body['UHostIds.' + str(i)] = eipids[i]
 
         return self._get(body)
 
 
-    def eip_update(self,region,eipid,name=None,tag=None,remark=None):
+    def eip_update(self, region, eipid, name=None, tag=None, remark=None):
         '''
         update an eip
         :param region:
@@ -58,38 +59,38 @@ class UnetManager(base.Manager):
         :param remark:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='UpdateEIPAttribute'
-        body['EIPId']=eipid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'UpdateEIPAttribute'
+        body['EIPId'] = eipid
         if not name and not tag and remark:
             raise uexceptions.BadParameters
         if name:
-            body['Name']=name
+            body['Name'] = name
         if tag:
-            body['Tag']=tag
+            body['Tag'] = tag
         if remark:
-            body['Remark']=tag
+            body['Remark'] = tag
 
         return self._get(body)
 
 
-    def eip_release(self,region,eipid):
+    def eip_release(self, region, eipid):
         '''
         release an eip
         :param region:
         :param eipid:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='ReleaseEIP'
-        body['EIPId']=eipid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'ReleaseEIP'
+        body['EIPId'] = eipid
 
         return self._get(body)
 
 
-    def eip_bind(self,region,eipid,resource_type,resourceid):
+    def eip_bind(self, region, eipid, resource_type, resourceid):
         '''
         bind ip to given resource
         :param region:
@@ -98,17 +99,17 @@ class UnetManager(base.Manager):
         :param resourceid:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='BindEIP'
-        body['EIPId']=eipid
-        body['ResourceType']=resource_type
-        body['ResourceId']=resourceid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'BindEIP'
+        body['EIPId'] = eipid
+        body['ResourceType'] = resource_type
+        body['ResourceId'] = resourceid
 
         return self._get(body)
 
 
-    def eip_unbind(self,region,eipid,resource_type,resourceid):
+    def eip_unbind(self, region, eipid, resource_type, resourceid):
         '''
         unbind ip to given resource
         :param region:
@@ -117,17 +118,17 @@ class UnetManager(base.Manager):
         :param resourceid:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='UnBindEIP'
-        body['EIPId']=eipid
-        body['ResourceType']=resource_type
-        body['ResourceId']=resourceid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'UnBindEIP'
+        body['EIPId'] = eipid
+        body['ResourceType'] = resource_type
+        body['ResourceId'] = resourceid
 
         return self._get(body)
 
 
-    def eip_bandwidth_modify(self,region,eipid,bandwidth):
+    def eip_bandwidth_modify(self, region, eipid, bandwidth):
         '''
         modify bandwidth of a given eip
         :param region:
@@ -135,16 +136,16 @@ class UnetManager(base.Manager):
         :param bandwidth:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='ModifyEIPBandwidth'
-        body['EIPId']=eipid
-        body['Bandwidth']=bandwidth
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'ModifyEIPBandwidth'
+        body['EIPId'] = eipid
+        body['Bandwidth'] = bandwidth
 
         return self._get(body)
 
 
-    def eip_weight_modify(self,region,eipid,weight):
+    def eip_weight_modify(self, region, eipid, weight):
         '''
         modify weight of a given eip
         :param region:
@@ -152,16 +153,16 @@ class UnetManager(base.Manager):
         :param weight:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='ModifyEIPWeight'
-        body['EIPId']=eipid
-        body['Weight']=weight
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'ModifyEIPWeight'
+        body['EIPId'] = eipid
+        body['Weight'] = weight
 
         return self._get(body)
 
 
-    def eip_price_get(self,region,operator_name,bandwidth,charge_type=None):
+    def eip_price_get(self, region, operator_name, bandwidth, charge_type=None):
         '''
         get eip price
         :param region:
@@ -170,62 +171,62 @@ class UnetManager(base.Manager):
         :param charge_type:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='GetEIPPrice'
-        body['OperatorName']=operator_name
-        body['Bandwidth']=bandwidth
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'GetEIPPrice'
+        body['OperatorName'] = operator_name
+        body['Bandwidth'] = bandwidth
         if charge_type:
-            body['ChargeType']=charge_type
+            body['ChargeType'] = charge_type
 
         return self._get(body)
 
 
-    def vip_allocate(self,region,count=None):
+    def vip_allocate(self, region, count=None):
         '''
         allocate a vip
         :param region:
         :param count:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='AllocateVIP'
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'AllocateVIP'
         if count:
-            body['Count']=count
+            body['Count'] = count
 
         return self._get(body)
 
 
-    def vip_get(self,region):
+    def vip_get(self, region):
         '''
         list all vip
         :param region:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='DescribeVIP'
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'DescribeVIP'
 
         return self._get(body)
 
 
-    def vip_release(self,region,vip):
+    def vip_release(self, region, vip):
         '''
         release a vip
         :param region:
         :param vip:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='ReleaseVIP'
-        body['VIP']=vip
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'ReleaseVIP'
+        body['VIP'] = vip
 
         return self._get(body)
 
 
-    def sec_get(self,region,resourcetype=None,resourceid=None,groupid=None):
+    def sec_get(self, region, resourcetype=None, resourceid=None, groupid=None):
         '''
         get security group info
         :param region:
@@ -234,36 +235,36 @@ class UnetManager(base.Manager):
         :param groupid:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='DescribeSecurityGroup'
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'DescribeSecurityGroup'
         if resourcetype:
-            body['ResourceType']=resourcetype
+            body['ResourceType'] = resourcetype
         if resourceid:
-            body['ResourceId']=resourceid
+            body['ResourceId'] = resourceid
         if groupid:
-            body['GroupId']=groupid
+            body['GroupId'] = groupid
 
         return self._get(body)
 
 
-    def sec_reource_get(self,region,groupid=None):
+    def sec_reource_get(self, region, groupid=None):
         '''
         get resource attached to given security group
         :param region:
         :param groupid:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='DescribeSecurityGroupResource'
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'DescribeSecurityGroupResource'
         if groupid:
-            body['GroupId']=groupid
+            body['GroupId'] = groupid
 
         return self._get(body)
 
 
-    def sec_creat(self,region,group_name,rules,description=None):
+    def sec_creat(self, region, group_name, rules, description=None):
         '''
         create security group
         :param region:
@@ -272,20 +273,20 @@ class UnetManager(base.Manager):
         :param description:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='CreateSecurityGroup'
-        body['GroupName']=group_name
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'CreateSecurityGroup'
+        body['GroupName'] = group_name
         if rules:
             for i in range(len(rules)):
-                body['Rule.'+str(i)]=rules[i]
+                body['Rule.' + str(i)] = rules[i]
         if description:
-            body['Description']=description
+            body['Description'] = description
 
         return self._get(body)
 
 
-    def sec_update(self,region,groupid,rules):
+    def sec_update(self, region, groupid, rules):
         '''
         update given security group
         :param region:
@@ -293,18 +294,18 @@ class UnetManager(base.Manager):
         :param rules: []
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='UpdateSecurityGroup'
-        body['GroupId']=groupid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'UpdateSecurityGroup'
+        body['GroupId'] = groupid
         if rules:
             for i in range(len(rules)):
-                body['Rule.'+str(i)]=rules[i]
+                body['Rule.' + str(i)] = rules[i]
 
         return self._get(body)
 
 
-    def sec_grant(self,region,groupid,resource_type,resourceid):
+    def sec_grant(self, region, groupid, resource_type, resourceid):
         '''
         grant given security group to specified resource
         :param region:
@@ -313,26 +314,26 @@ class UnetManager(base.Manager):
         :param resourceid:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='GrantSecurityGroup'
-        body['GroupId']=groupid
-        body['ResourceType']=resource_type
-        body['ResourceId']=resourceid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'GrantSecurityGroup'
+        body['GroupId'] = groupid
+        body['ResourceType'] = resource_type
+        body['ResourceId'] = resourceid
 
         return self._get(body)
 
 
-    def sec_delete(self,region,groupid):
+    def sec_delete(self, region, groupid):
         '''
         delete given security group
         :param region:
         :param groupip:
         :return:
         '''
-        body={}
-        body['Region']=region
-        body['Action']='DeleteSecurityGroup'
-        body['GroupId']=groupid
+        body = {}
+        body['Region'] = region
+        body['Action'] = 'DeleteSecurityGroup'
+        body['GroupId'] = groupid
 
         return self._get(body)

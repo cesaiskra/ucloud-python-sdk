@@ -1,8 +1,9 @@
 import os
-import six
-import prettytable
 import textwrap
 import json
+
+import six
+import prettytable
 
 
 def add_arg(func, *args, **kwargs):
@@ -11,9 +12,7 @@ def add_arg(func, *args, **kwargs):
     if not hasattr(func, 'arguments'):
         func.arguments = []
 
-
     if (args, kwargs) not in func.arguments:
-
         func.arguments.insert(0, (args, kwargs))
 
 
@@ -26,9 +25,11 @@ def arg(*args, **kwargs):
     ... def entity_create(args):
     ...     pass
     """
+
     def _decorator(func):
         add_arg(func, *args, **kwargs)
         return func
+
     return _decorator
 
 
@@ -41,14 +42,16 @@ def multi_arg(*args, **kwargs):
     ... def entity_create(args):
     ...     pass
     """
+
     def _decorator(func):
         add_arg(func, *args, **kwargs)
         return func
+
     return _decorator
 
 
 def print_original_dict(d):
-    d=json.dumps(d, encoding='UTF-8', ensure_ascii=False,indent=2)
+    d = json.dumps(d, encoding='UTF-8', ensure_ascii=False, indent=2)
     print(d)
 
 
@@ -58,7 +61,7 @@ def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
     for k, v in sorted(d.items()):
         # convert dict to str to check length
         if isinstance(v, (dict, list)):
-            #v = jsonutils.dumps(v)
+            # v = jsonutils.dumps(v)
             v = json.dumps(v)
         if wrap > 0:
             v = textwrap.fill(str(v), wrap)
@@ -75,7 +78,7 @@ def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
                 v = '-'
             pt.add_row([k, v])
 
-    #result = encodeutils.safe_encode(pt.get_string())
+    # result = encodeutils.safe_encode(pt.get_string())
     result = pt.get_string()
 
     if six.PY3:
@@ -110,8 +113,8 @@ def print_list(objs, fields, formatters={}, sortby_index=None):
                 if field in mixed_case_fields:
                     field_name = field.replace(' ', '_')
                 # else:
-                #     field_name = field.lower().replace(' ', '_')
-                field_name=field
+                # field_name = field.lower().replace(' ', '_')
+                field_name = field
                 data = o.get(field_name, '')
                 if data is None:
                     data = '-'
@@ -127,6 +130,7 @@ def print_list(objs, fields, formatters={}, sortby_index=None):
         result = result.decode()
 
     print(result)
+
 
 def env(*args, **kwargs):
     """Returns environment variable set."""

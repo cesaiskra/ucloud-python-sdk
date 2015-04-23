@@ -1,12 +1,12 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 import hashlib
 import time
 
 
-region="cn-north-03"
-region="cn-east-01"
-region="hk-01"
-region="us-west-01"
+region = "cn-north-03"
+region = "cn-east-01"
+region = "hk-01"
+region = "us-west-01"
 '''
 数据中心名称	API名称	数据中心网络带宽线路
 北京BGP-A	cn-north-01	Bgp: BGP线路
@@ -18,8 +18,9 @@ region="us-west-01"
 北美	us-west-01	International: 国际线路
 '''
 
+
 def get_token(private_key, params):
-    items=params.items()
+    items = params.items()
     items.sort()
 
     params_data = "";
@@ -36,5 +37,5 @@ def get_token(private_key, params):
 
 def get_formate_time(now):
     if now:
-        return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(now))
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(now))
     return ''

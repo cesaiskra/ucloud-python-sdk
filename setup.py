@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='ucloudclient',
-    version='0.1.5',
+    version='0.1.7',
     packages=['ucloudclient'],
     # packages = find_packages('ucloudclient'),
     # package_dir = {'':'ucloudclient'},

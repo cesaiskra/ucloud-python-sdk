@@ -1,7 +1,7 @@
 from ucloudclient.utils import base
 
 
-class UnetManager(base.Manager):
+class UmonManager(base.Manager):
     '''
     monitor manager class
     '''

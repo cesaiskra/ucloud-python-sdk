@@ -18,7 +18,7 @@ class Client(object):
 
         self.uhost = uhost.UhostManager(self)
         self.unet = unet.UnetManager(self)
-        self.umon = umon.UnetManager(self)
+        self.umon = umon.UmonManager(self)
 
         self.client = base.HTTPClient(base_url, debug, timing)
 

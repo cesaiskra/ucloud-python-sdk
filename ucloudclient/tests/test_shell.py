@@ -1,8 +1,8 @@
 __author__ = 'hyphen'
-import mock
 import re
 import sys
 
+import mock
 from testtools import TestCase
 from testtools import matchers
 import fixtures

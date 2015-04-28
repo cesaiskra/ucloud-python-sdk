@@ -1,6 +1,7 @@
+import json
 import os
 import textwrap
-import json
+import time
 
 import six
 import prettytable
@@ -140,3 +141,9 @@ def env(*args, **kwargs):
         if value:
             return value
     return kwargs.get('default', '')
+
+
+def parse_time(d):
+    for (k,v) in d.items():
+        if 'Time' in k and isinstance(v, int) and v > 1000000000:
+            d[k] = time.strftime('%F %T', time.localtime(v))

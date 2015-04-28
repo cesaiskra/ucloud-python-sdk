@@ -1,5 +1,4 @@
 import mock
-
 from testtools import TestCase
 
 from ucloudclient.utils import base

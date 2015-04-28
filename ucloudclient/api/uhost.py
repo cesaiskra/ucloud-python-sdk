@@ -341,7 +341,7 @@ class UhostManager(base.Manager):
         '''
         body = {}
         body['Region'] = region
-        body['Action'] = 'AttachUdisk'
+        body['Action'] = 'AttachUDisk'
         body['UHostId'] = uhostid
         body['UDiskId'] = udiskid
 
@@ -357,7 +357,7 @@ class UhostManager(base.Manager):
         '''
         body = {}
         body['Region'] = region
-        body['Action'] = 'DetachUdisk'
+        body['Action'] = 'DetachUDisk'
         body['UHostId'] = uhostid
         body['UDiskId'] = udiskid
 

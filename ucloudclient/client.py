@@ -1,7 +1,7 @@
 '''
 ucloud python sdk client.
 '''
-from api import umon, unet, uhost
+from api import umon, unet, uhost, udisk
 from utils import base
 
 
@@ -19,6 +19,7 @@ class Client(object):
         self.uhost = uhost.UhostManager(self)
         self.unet = unet.UnetManager(self)
         self.umon = umon.UmonManager(self)
+        self.udisk = udisk.UdiskManager(self)
 
         self.client = base.HTTPClient(base_url, debug, timing)
 

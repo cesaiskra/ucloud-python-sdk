@@ -1,6 +1,7 @@
 shell.py
 *.pyc
 ucloud-me.rc
+test/
 dist/
 build/
 ucloudclient.egg-info

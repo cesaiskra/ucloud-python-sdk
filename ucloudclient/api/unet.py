@@ -30,11 +30,11 @@ class UnetManager(base.Manager):
 
         return self._get(body)
 
-    def eip_get(self, region, eipids=None, offset=None, limit=None):
+    def eip_list(self, region, offset=None, limit=None):
         '''
         query eip in given id
         :param region:
-        :param eipids:
+        :param uhostids:
         :param offset:
         :param limit:
         :return:
@@ -42,9 +42,26 @@ class UnetManager(base.Manager):
         body = {}
         body['Region'] = region
         body['Action'] = "DescribeEIP"
-        if eipids:
-            for i in range(len(eipids)):
-                body['EIPIds.' + str(i)] = eipids[i]
+        if offset:
+            body['Offset'] = offset
+        if limit:
+            body['Limit'] = limit
+        return self._get(body)
+
+
+    def eip_get(self, region, eipid):
+        '''
+        query eip in given id
+        :param region:
+        :param uhostids:
+        :param offset:
+        :param limit:
+        :return:
+        '''
+        body = {}
+        body['Region'] = region
+        body['Action'] = "DescribeEIP"
+        body['EIPId'] = eipid
 
         return self._get(body)
 

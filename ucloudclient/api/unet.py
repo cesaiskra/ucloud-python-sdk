@@ -34,7 +34,7 @@ class UnetManager(base.Manager):
         '''
         query eip in given id
         :param region:
-        :param uhostids:
+        :param eipids:
         :param offset:
         :param limit:
         :return:
@@ -44,7 +44,7 @@ class UnetManager(base.Manager):
         body['Action'] = "DescribeEIP"
         if eipids:
             for i in range(len(eipids)):
-                body['UHostIds.' + str(i)] = eipids[i]
+                body['EIPIds.' + str(i)] = eipids[i]
 
         return self._get(body)
 

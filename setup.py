@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
-from setuptools import setup
+from setuptools import setup,find_packages
 
 setup(
     name='ucloudclient',
     version='0.1.7',
-    packages=['ucloudclient'],
-    # packages = find_packages('ucloudclient'),
+    # packages=['ucloudclient'],
+    packages = find_packages(),
     # package_dir = {'':'ucloudclient'},
     keywords=('ucloud', 'client'),
     description='Ucloud(Ucloud.cn) python client and command line tools.'

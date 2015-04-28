@@ -20,18 +20,25 @@ feel free to contact me if you find any bugs or have good advices.
 
 ###### 1.1.1 uhost具体方法：
 
-    ['attach_disk', 'create', 'create_image', 'create_snapshot', 'delete_image', 'detach_disk', 'get', 'get_image', 'get_price', 'get_vnc', 'list_snapshot', 'modify_name', 'modify_tag', 'reboot', 'reinstall', 'reset_password', 'resize', 'start', 'stop', 'terminate']
+    ['attach_disk', 'create', 'create_image', 'create_snapshot',
+    'delete_image', 'detach_disk', 'get', 'get_image', 'get_price',
+    'get_vnc', 'list_snapshot', 'modify_name', 'modify_tag', 'reboot',
+    'reinstall', 'reset_password', 'resize', 'start', 'stop', 'terminate']
 
 ###### 1.1.2 unet具体方法：
 
-    'eip_bandwidth_modify', 'eip_bind', 'eip_create', 'eip_get', 'eip_price_get', 'eip_release', 'eip_unbind', 'eip_update', 'eip_weight_modify', 'sec_creat', 'sec_delete', 'sec_get', 'sec_grant', 'sec_reource_get', 'sec_update', 'vip_allocate', 'vip_get', 'vip_release']
+    'eip_bandwidth_modify', 'eip_bind', 'eip_create', 'eip_get',
+    'eip_price_get', 'eip_release', 'eip_unbind', 'eip_update',
+    'eip_weight_modify', 'sec_creat', 'sec_delete', 'sec_get', 'sec_grant',
+    'sec_reource_get', 'sec_update', 'vip_allocate', 'vip_get', 'vip_release']
 
 ###### 1.1.3 umon具体方法：
 
     ['metric_get']
 
 ##### 1.2 命令行操作分类：
-在命令行下，也是按资源分类，然后再到资源操作，具体可以留意下面的命令行操作帮助。另外，命令行增加下面的功能：
+在命令行下，也是按资源分类，然后再到资源操作，具体可以留意下面的命令行操作帮助。另外，
+命令行增加下面的功能：
 
 1. 命令可以加 "--debug" 来查看操作的关键路径的打印信息.
 2. 命令可以加 "--timming" 来获得执行命令发送http请求所花费的时间.
@@ -109,18 +116,18 @@ output:
 #### 2.3 在linux环境下的命令行使用:
 使用之前,先编辑下uclud.rc文件,然后导入环境变量,接下来的命令就不用输入你的认证信息了.
 
-	hyphendeMacBook-Air:ucloud-python-sdk hyphen$ cat ucloud.rc 
+	# cat ucloud.rc
 	export UCLOUD_REGION="cn-north-03"
 	export UCLOUD_URL="https://api.ucloud.cn"
 	export UCLOUD_PUBKEY="asdf"
 	export UCLOUD_PRIKEY="asdf"
 	export PS1='[\u@\h \W(ucloud)]\$ '
 	
-	hyphendeMacBook-Air:ucloud-python-sdk hyphen$ source ucloud.rc
+	# source ucloud.rc
 
 命令帮助:
 
-    (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ $ ucloud help
+    # ucloud help
 
     usage: ucloud [--debug] [--timing] <subcommand> ...
 
@@ -187,7 +194,7 @@ output:
 
 命令样例:
 
-    hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud uhost-show uhost-4dmzop
+    # ucloud uhost-show uhost-4dmzop
 
     +----------------+------------------------------------------------------------------+
     | Property       | Value                                                            |
@@ -213,7 +220,7 @@ output:
     | UHostType      | Normal                                                           |
     +----------------+------------------------------------------------------------------+
 
-    (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud  uhost-image-list
+    # ucloud  uhost-image-list
 
     +---------------+------------------------+---------+
     | ImageId       | ImageName              | OsType  |
@@ -222,7 +229,7 @@ output:
     | uimage-0nvikt | RHEL 6.2 64位          | Linux   |
     | uimage-0xalan | Gentoo 2.2 64位        | Linux   |
 
-    (.venv)hyphendeMacBook-Air:ucloud-python-sdk hyphen$ ucloud  uhost-image-show uimage-0duw4w
+    # ucloud  uhost-image-show uimage-0duw4w
 
     +------------------+--------------------------------------------------+
     | Property         | Value                                            |
@@ -237,10 +244,29 @@ output:
     | State            | Available                                        |
     +------------------+--------------------------------------------------+
 
-#### 三 Unit Test:
+#### 三 测试:
+
 已经完成shell,client,HTTPClient的unit test.主要使用了testtools,mock,fixtures等第三方模块.
 依赖请查看teset-requirements.txt.
 
 #### 四 贡献：
+由于时间仓促，未能将Ucloud官方提供的接口全部覆盖，只覆盖了比赛要求中的三种资源，有兴趣的同学可以接着完善。
 代码遵守PEP8风格。
 
+##### 4.1 SDK中增加api接口
+可以在目录“api”下面增加相应的资源管理模块，具体实现请参考现在已在的资源，
+然后在根目录下的“client.py”文件中增加相应的属性即可。
+
+##### 4.2 命令行中增加命令
+在目录“api/shell_action.py”里面增加相应命令的方法，处理好相应命令的输出，提高可读性，比如主机详情，
+我特意将数据特定处理输出，更加美观。关于输出的美化处理，现在已经写了好几个工具方法，
+在“utils/shell_utils.py”模块里面
+
+##### 4.3 测试模块
+具体API方法的测试模块尚未完成。
+
+#### 五 许可：
+Apache License Version 2.0
+
+#### 六 发行记录：
+V0.1.7  更新readme,完善本文档，修复umon资源中类的bug.

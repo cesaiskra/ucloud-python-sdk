@@ -135,12 +135,14 @@ output:
 
     Positional arguments:
       <subcommand>
+        udisk-list               get all udisks list
+        udisk-show               show details of a udisk
         uhost-attach-disk        attach a disk to a host
         uhost-create             boot a host
         uhost-create-image       create an image from a given host
         uhost-create-snapshot    create a snapshot from a host
         uhost-delete-image       delete an image by id
-        uhost-detach-disk        attach a disk to a host
+        uhost-detach-disk        deattach a disk to a host
         uhost-get-price          get price of given type of host/s
         uhost-get-vnc            get a host's vnc connection information
         uhost-image-list         list all images
@@ -150,14 +152,15 @@ output:
         uhost-modify-name        modify a host's name
         uhost-modify-tag         modify a host's tag
         uhost-reboot             reboot a host
-        uhost-reinstall          reinstall a host
-        uhost-reset-password     reset a host's password
+        uhost-reinstall          reinstall a instance, instance must be shutoff.
+        uhost-reset-password     reset a host's password, host must be shutoff.
         uhost-resize             resize a host
         uhost-show               show detail of a host
         uhost-start              start a host
         uhost-stop               stop a host
         uhost-terminate          terminate a host
-        umon-metric-get          get metic data
+        umon-metric-list         get metic data
+        umon-metric-show         get metic data
         unet-eip-bandwidth-modify
                                  modify bandwidth of a given eip
         unet-eip-bind            bind ip to given resource
@@ -191,6 +194,7 @@ output:
       --timing                   Print call timing info
 
     See "ucloud help COMMAND" for help on a specific command.
+
 
 命令样例:
 
@@ -229,20 +233,21 @@ output:
     | uimage-0nvikt | RHEL 6.2 64位          | Linux   |
     | uimage-0xalan | Gentoo 2.2 64位        | Linux   |
 
-    # ucloud  uhost-image-show uimage-0duw4w
+    # ucloud  uhost-image-show uimage-zkezxp
 
-    +------------------+--------------------------------------------------+
-    | Property         | Value                                            |
-    +------------------+--------------------------------------------------+
-    | CreateTime       | 1394435416                                       |
-    | ImageDescription | Community ENTerprise Operating System 5.8 64-bit |
-    | ImageId          | uimage-0duw4w                                    |
-    | ImageName        | CentOS 5.8 64位                                  |
-    | ImageType        | Base                                             |
-    | OsName           | CentOS 5.8 64位                                  |
-    | OsType           | Linux                                            |
-    | State            | Available                                        |
-    +------------------+--------------------------------------------------+
+    +------------------+---------------------------------------------+
+    | Property         | Value                                       |
+    +------------------+---------------------------------------------+
+    | CreateTime       | 2014-12-31 18:55:54                         |
+    | ImageDescription | Red Hat Enterprise Linux version 5.7 64-bit |
+    | ImageId          | uimage-zkezxp                               |
+    | ImageName        | RHEL 5.7 64位                               |
+    | ImageType        | Base                                        |
+    | OsName           | RedHat 5.7 64位                             |
+    | OsType           | Linux                                       |
+    | State            | Available                                   |
+    +------------------+---------------------------------------------+
+
 
 #### 三 测试:
 

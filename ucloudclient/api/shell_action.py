@@ -79,7 +79,7 @@ def _print_host(d):
     # -4dmzop',
     # u'NetworkState': u'Connected', u'ChargeType': u'Month', u'Memory': 2048,
     # u'OsType': u'Linux', u'CreateTime': 1426953872, u'BasicImageName':
-    #   u'Ubuntu 14.04 64\u4f4d'}
+    # u'Ubuntu 14.04 64\u4f4d'}
     # import pdb
     # pdb.set_trace()
     disk_set = d.pop('DiskSet')
@@ -147,7 +147,8 @@ def _print_host(d):
     default=None,
     type=int,
     metavar='<diskspace>',
-    help=("disk capacity(GB) of host[0,1000], must be times of 10, default 60, ."))
+    help=("disk capacity(GB) of host[0,1000], must be times of 10,"
+          "default 60, ."))
 @shell_utils.arg(
     '--name',
     default=None,
@@ -219,11 +220,11 @@ def do_uhost_list(cs, args):
     '''
 
     result = cs.uhost.list(args.ucloud_region, offset=args.offset,
-                          limit=args.limit).get('UHostSet')
+                           limit=args.limit).get('UHostSet')
     for i in result:
         shell_utils.parse_time(i)
     shell_utils.print_list(result, ['Name', 'UHostId', 'Tag', 'State',
-                                    'BasicImageName','ExpireTime'])
+                                    'BasicImageName', 'ExpireTime'])
 
 
 @shell_utils.arg(
@@ -294,7 +295,8 @@ def do_uhost_resize(cs, args):
 
     result = cs.uhost.resize(args.ucloud_region, args.uhostid, args.cpu,
                              args.memory, args.diskspace)
-    _print_action_result({'Id':args.uhostid})
+    _print_action_result({'Id': args.uhostid})
+
 
 @shell_utils.arg(
     'uhostid',
@@ -340,7 +342,7 @@ def do_uhost_reset_password(cs, args):
 
     result = cs.uhost.reset_password(args.ucloud_region, args.uhostid,
                                      args.password)
-    _print_action_result({'Id':args.uhostid})
+    _print_action_result({'Id': args.uhostid})
 
 
 @shell_utils.arg(
@@ -624,9 +626,9 @@ def do_umon_metric_list(cs, args):
     get metic data
     '''
     result = cs.umon.metric_list(args.ucloud_region,
-                                args.resourceid, args.resource_type,
-                                args.time_range, args.begin_time,
-                                args.end_time)
+                                 args.resourceid, args.resource_type,
+                                 args.time_range, args.begin_time,
+                                 args.end_time)
     _print_origin_dict(result)
 
 
@@ -671,7 +673,8 @@ def do_umon_metric_show(cs, args):
 @shell_utils.arg(
     'operator_name',
     metavar='<operator_name>',
-    help=("operator_name of eip,'Telecom','Unicom','International','BGP' or 'Duplet'."))
+    help=("operator_name of eip,'Telecom','Unicom','International','BGP' or"
+          " 'Duplet'."))
 @shell_utils.arg(
     'bandwidth',
     metavar='<bandwidth>',
@@ -711,14 +714,14 @@ def do_unet_eip_list(cs, args):
     '''
 
     result = cs.unet.eip_list(args.ucloud_region,
-                             args.offset, args.limit).get('EIPSet')
+                              args.offset, args.limit).get('EIPSet')
     if result:
         for eip in result:
             ip = eip.get('EIPAddr')[0]
             eip.update(ip)
             shell_utils.parse_time(eip)
         shell_utils.print_list(result, ['Name', 'EIPId', 'Bandwidth', 'IP',
-                                    'OperatorName','ExpireTime'])
+                                        'OperatorName', 'ExpireTime'])
     else:
         _print_nodata()
 
@@ -766,7 +769,7 @@ def do_unet_eip_update(cs, args):
     '''
     result = cs.unet.eip_update(args.ucloud_region, args.id,
                                 args.name, args.tag, args.remark)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
@@ -801,7 +804,7 @@ def do_unet_eip_bind(cs, args):
 
     result = cs.unet.eip_bind(args.ucloud_region, args.id,
                               args.resource_type, args.reource_id)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
@@ -823,7 +826,7 @@ def do_unet_eip_unbind(cs, args):
 
     result = cs.unet.eip_unbind(args.ucloud_region, args.id,
                                 args.resource_type, args.reource_id)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
@@ -841,7 +844,7 @@ def do_unet_eip_bandwidth_modify(cs, args):
 
     result = cs.unet.eip_bandwidth_modify(args.ucloud_region, args.id,
                                           args.bandwidth)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
@@ -859,13 +862,14 @@ def do_unet_eip_weight_modify(cs, args):
 
     result = cs.unet.eip_weight_modify(args.ucloud_region, args.id,
                                        args.weight)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
     'operator_name',
     metavar='<operator_name>',
-    help=("operator_name of eip,'Telecom','Unicom','International','BGP' or 'Duplet'."))
+    help=("operator_name of eip,'Telecom','Unicom','International','BGP' or"
+          " 'Duplet'."))
 @shell_utils.arg(
     'bandwidth',
     metavar='<bandwidth>',
@@ -918,7 +922,7 @@ def do_unet_vip_release(cs, args):
     '''
 
     result = cs.unet.vip_release(args.ucloud_region, args.vip_address)
-    _print_action_result({'Id':args.vip_address})
+    _print_action_result({'Id': args.vip_address})
 
 
 @shell_utils.arg(
@@ -1011,7 +1015,7 @@ def do_unet_sec_update(cs, args):
     '''
 
     result = cs.unet.sec_update(args.ucloud_region, args.id, args.rule)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
@@ -1033,7 +1037,7 @@ def do_unet_sec_grant(cs, args):
 
     result = cs.unet.sec_grant(args.ucloud_region, args.id, args.resource_type,
                                args.resource_id)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 @shell_utils.arg(
@@ -1046,7 +1050,7 @@ def do_unet_sec_delete(cs, args):
     '''
 
     result = cs.unet.sec_delete(args.ucloud_region, args.id)
-    _print_action_result({'Id':args.id})
+    _print_action_result({'Id': args.id})
 
 
 def do_udisk_list(cs, args):
@@ -1058,7 +1062,7 @@ def do_udisk_list(cs, args):
     for i in result:
         shell_utils.parse_time(i)
     shell_utils.print_list(result, ['Name', 'UDiskId', 'Size', 'Status',
-                                    'ChargeType','ExpiredTime'])
+                                    'ChargeType', 'ExpiredTime'])
 
 
 @shell_utils.arg(

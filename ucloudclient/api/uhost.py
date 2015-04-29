@@ -69,7 +69,6 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-
     def list(self, region, offset=None, limit=None):
         '''
         query host in given region or given host id

@@ -35,10 +35,9 @@ class UmonManager(base.Manager):
 
         return self._get(body)
 
-
     def metric_list(self, region, resourceid, resource_type,
-                   time_range=None,
-                   begin_time=None, end_time=None):
+                    time_range=None,
+                    begin_time=None, end_time=None):
         '''
         get metric
         :param region:

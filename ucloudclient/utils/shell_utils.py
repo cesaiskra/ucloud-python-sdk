@@ -144,6 +144,6 @@ def env(*args, **kwargs):
 
 
 def parse_time(d):
-    for (k,v) in d.items():
+    for (k, v) in d.items():
         if 'Time' in k and isinstance(v, int) and v > 1000000000:
             d[k] = time.strftime('%F %T', time.localtime(v))

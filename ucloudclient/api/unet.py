@@ -48,7 +48,6 @@ class UnetManager(base.Manager):
             body['Limit'] = limit
         return self._get(body)
 
-
     def eip_get(self, region, eipid):
         '''
         query eip in given id

@@ -22,7 +22,6 @@ class UdiskManager(base.Manager):
 
         return self._get(body)
 
-
     def list(self, region, offset=None, limin=None, projectid=None):
 
         body = {}
@@ -36,4 +35,3 @@ class UdiskManager(base.Manager):
             body['ProjectId'] = projectid
 
         return self._get(body)
-

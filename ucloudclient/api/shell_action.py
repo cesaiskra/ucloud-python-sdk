@@ -195,7 +195,7 @@ def do_uhost_show(cs, args):
     '''
 
     host = cs.uhost.get(args.ucloud_region,
-                        [args.uhostid]).get('UHostSet')
+                        args.uhostid).get('UHostSet')
     if host:
         host = host[0]
     else:
@@ -218,7 +218,7 @@ def do_uhost_list(cs, args):
     list  uhosts
     '''
 
-    result = cs.uhost.get(args.ucloud_region, offset=args.offset,
+    result = cs.uhost.list(args.ucloud_region, offset=args.offset,
                           limit=args.limit).get('UHostSet')
     for i in result:
         shell_utils.parse_time(i)
@@ -597,6 +597,40 @@ def do_uhost_list_snapshot(cs, args):
 
 
 @shell_utils.arg(
+    'resourceid',
+    metavar='<resourceid>',
+    help=("resourceid of metric."))
+@shell_utils.arg(
+    'resource_type',
+    metavar='<resource_type>',
+    help=("uhosresource_typetid of metric."))
+@shell_utils.arg(
+    '--time_range',
+    default=None,
+    metavar='<time_range>',
+    help=("time_range of metric."))
+@shell_utils.arg(
+    '--begin_time',
+    default=None,
+    metavar='<begin_time>',
+    help=("begin_time of metric."))
+@shell_utils.arg(
+    '--end_time',
+    default=None,
+    metavar='<end_time>',
+    help=("end_time of metric."))
+def do_umon_metric_list(cs, args):
+    '''
+    get metic data
+    '''
+    result = cs.umon.metric_list(args.ucloud_region,
+                                args.resourceid, args.resource_type,
+                                args.time_range, args.begin_time,
+                                args.end_time)
+    _print_origin_dict(result)
+
+
+@shell_utils.arg(
     'metric',
     metavar='<metrics>',
     help=("metrics name"))
@@ -623,7 +657,7 @@ def do_uhost_list_snapshot(cs, args):
     default=None,
     metavar='<end_time>',
     help=("end_time of metric."))
-def do_umon_metric_get(cs, args):
+def do_umon_metric_show(cs, args):
     '''
     get metic data
     '''

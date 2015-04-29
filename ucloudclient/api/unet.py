@@ -275,7 +275,7 @@ class UnetManager(base.Manager):
         create security group
         :param region:
         :param group_name:
-        :param rule: []
+        :param rule: [],must be a list, even if only one rule
         :param description:
         :return:
         '''
@@ -296,7 +296,7 @@ class UnetManager(base.Manager):
         update given security group
         :param region:
         :param groupid:
-        :param rules: []
+        :param rules: [],must be a list, even if only one rule
         :return:
         '''
         body = {}

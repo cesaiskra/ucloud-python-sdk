@@ -48,7 +48,6 @@ class UnetManager(base.Manager):
             body['Limit'] = limit
         return self._get(body)
 
-
     def eip_get(self, region, eipid):
         '''
         query eip in given id
@@ -275,7 +274,7 @@ class UnetManager(base.Manager):
         create security group
         :param region:
         :param group_name:
-        :param rule: []
+        :param rule: [],must be a list, even if only one rule
         :param description:
         :return:
         '''
@@ -296,7 +295,7 @@ class UnetManager(base.Manager):
         update given security group
         :param region:
         :param groupid:
-        :param rules: []
+        :param rules: [],must be a list, even if only one rule
         :return:
         '''
         body = {}

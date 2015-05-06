@@ -163,7 +163,8 @@ output:
         uhost-start              start a host
         uhost-stop               stop a host
         uhost-terminate          terminate a host
-        umon-metric-get          get metic data
+        umon-metric-list         get metic data
+        umon-metric-show         get metic data
         unet-eip-bandwidth-modify
                                  modify bandwidth of a given eip
         unet-eip-bind            bind ip to given resource
@@ -197,6 +198,7 @@ output:
       --timing                   Print call timing info
 
     See "ucloud help COMMAND" for help on a specific command.
+
 
 命令样例:
 
@@ -235,20 +237,21 @@ output:
     | uimage-0nvikt | RHEL 6.2 64位          | Linux   |
     | uimage-0xalan | Gentoo 2.2 64位        | Linux   |
 
-    # ucloud  uhost-image-show uimage-0duw4w
+    # ucloud  uhost-image-show uimage-zkezxp
 
-    +------------------+--------------------------------------------------+
-    | Property         | Value                                            |
-    +------------------+--------------------------------------------------+
-    | CreateTime       | 1394435416                                       |
-    | ImageDescription | Community ENTerprise Operating System 5.8 64-bit |
-    | ImageId          | uimage-0duw4w                                    |
-    | ImageName        | CentOS 5.8 64位                                  |
-    | ImageType        | Base                                             |
-    | OsName           | CentOS 5.8 64位                                  |
-    | OsType           | Linux                                            |
-    | State            | Available                                        |
-    +------------------+--------------------------------------------------+
+    +------------------+---------------------------------------------+
+    | Property         | Value                                       |
+    +------------------+---------------------------------------------+
+    | CreateTime       | 2014-12-31 18:55:54                         |
+    | ImageDescription | Red Hat Enterprise Linux version 5.7 64-bit |
+    | ImageId          | uimage-zkezxp                               |
+    | ImageName        | RHEL 5.7 64位                               |
+    | ImageType        | Base                                        |
+    | OsName           | RedHat 5.7 64位                             |
+    | OsType           | Linux                                       |
+    | State            | Available                                   |
+    +------------------+---------------------------------------------+
+
 
     # ucloud udisk-list
     +------------+-----------+------+-----------+------------+---------------------+
@@ -285,4 +288,5 @@ Apache License Version 2.0
 V0.1.7  更新readme,完善本文档，修复umon资源中类的bug.
 V0.1.8 修复命令行下绝大部分bug
 V0.1.9 修复查询单条与多条，现在分开为list 和 get
-V0.2.2 增加udisk的操作
+V0.2.0 增加udisk的操作
+

@@ -55,11 +55,24 @@ class UhostManager(base.Manager):
 
         return self._get(body)
 
-    def get(self, region, uhostids=None, offset=None, limit=None):
+    def get(self, region, uhostid):
         '''
         query host in given region or given host id
         :param region:
-        :param uhostids:
+        :param uhostid
+        :return:
+        '''
+        body = {}
+        body['Region'] = region
+        body['Action'] = "DescribeUHostInstance"
+        body['UHostId'] = uhostid
+
+        return self._get(body)
+
+    def list(self, region, offset=None, limit=None):
+        '''
+        query host in given region or given host id
+        :param region:
         :param offset:
         :param limit:
         :return:
@@ -67,9 +80,6 @@ class UhostManager(base.Manager):
         body = {}
         body['Region'] = region
         body['Action'] = "DescribeUHostInstance"
-        if uhostids:
-            for i in range(len(uhostids)):
-                body['UHostIds.' + str(i)] = uhostids[i]
         if offset:
             body['Offset'] = offset
         if limit:

@@ -7,11 +7,11 @@ welcome to contribute to this tools.
 feel free to contact me if you find any bugs or have good advices.
 
 #### 一、设计理念
-这个项目包含python sdk 和 命令行工具,覆盖了UHOST,UNET,UMON这三大资源管理.SDK设计上也是按前面三大资源来做区分.
+这个项目包含python sdk 和 命令行工具,覆盖了UHOST,UNET,UMON这三大资源管理,以及UDISK两个API.SDK设计上也是按前面三大资源来做区分.
 由于一直有研究openstack,发现它的命令行做得很不错,所以这里命令行则是参考了openstack 命令行工具的资源管理命令。
 
 ##### 1.1 SDK方法归类
-现在有host,net,mon三种资源：
+现在有host,net,mon,disk三种资源：
 基本上每种资源都有以下五个操作:
 
 1. list:查询本类所有的创建的资源,输出应该是列表,包含资源名称和ID等重要信息.    
@@ -35,6 +35,10 @@ feel free to contact me if you find any bugs or have good advices.
 ###### 1.1.3 umon具体方法：
 
     ['metric_get']
+
+###### 1.1.4 udisk具体方法：
+
+    ['get', 'list']
 
 ##### 1.2 命令行操作分类：
 在命令行下，也是按资源分类，然后再到资源操作，具体可以留意下面的命令行操作帮助。另外，
@@ -135,12 +139,14 @@ output:
 
     Positional arguments:
       <subcommand>
+        udisk-list               get all udisks list
+        udisk-show               show details of a udisk
         uhost-attach-disk        attach a disk to a host
         uhost-create             boot a host
         uhost-create-image       create an image from a given host
         uhost-create-snapshot    create a snapshot from a host
         uhost-delete-image       delete an image by id
-        uhost-detach-disk        attach a disk to a host
+        uhost-detach-disk        deattach a disk to a host
         uhost-get-price          get price of given type of host/s
         uhost-get-vnc            get a host's vnc connection information
         uhost-image-list         list all images
@@ -150,8 +156,8 @@ output:
         uhost-modify-name        modify a host's name
         uhost-modify-tag         modify a host's tag
         uhost-reboot             reboot a host
-        uhost-reinstall          reinstall a host
-        uhost-reset-password     reset a host's password
+        uhost-reinstall          reinstall a instance, instance must be shutoff.
+        uhost-reset-password     reset a host's password, host must be shutoff.
         uhost-resize             resize a host
         uhost-show               show detail of a host
         uhost-start              start a host
@@ -244,6 +250,13 @@ output:
     | State            | Available                                        |
     +------------------+--------------------------------------------------+
 
+    # ucloud udisk-list
+    +------------+-----------+------+-----------+------------+---------------------+
+    | Name       | UDiskId   | Size | Status    | ChargeType | ExpiredTime         |
+    +------------+-----------+------+-----------+------------+---------------------+
+    | yan_dist01 | bs-z33cgj | 1    | Available | Month      | 2015-05-28 22:48:45 |
+    +------------+-----------+------+-----------+------------+---------------------+
+
 #### 三 测试:
 
 已经完成shell,client,HTTPClient的unit test.主要使用了testtools,mock,fixtures等第三方模块.
@@ -270,3 +283,6 @@ Apache License Version 2.0
 
 #### 六 发行记录：
 V0.1.7  更新readme,完善本文档，修复umon资源中类的bug.
+V0.1.8 修复命令行下绝大部分bug
+V0.1.9 修复查询单条与多条，现在分开为list 和 get
+V0.2.2 增加udisk的操作

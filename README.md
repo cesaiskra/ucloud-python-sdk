@@ -285,9 +285,9 @@ output:
 Apache License Version 2.0
 
 #### 六 发行记录：
-V0.1.7  更新readme,完善本文档，修复umon资源中类的bug.
-V0.1.8 修复命令行下绝大部分bug
-V0.1.9 修复查询单条与多条，现在分开为list 和 get
-V0.2.0 增加udisk的操作
+1. V0.1.7  更新readme,完善本文档，修复umon资源中类的bug.
+2. V0.1.8 修复命令行下绝大部分bug
+3. V0.1.9 修复查询单条与多条，现在分开为list 和 get
+4. V0.2.0 增加udisk的操作
 
 

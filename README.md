@@ -129,6 +129,9 @@ output:
 	
 	# source ucloud.rc
 
+命令行写了使用TAB自动完成命令的功能，只需要如下操作即可自动完成命令。
+	#complete -W "`ucloud bash-completion`" ucloud
+
 命令帮助:
 
     # ucloud help

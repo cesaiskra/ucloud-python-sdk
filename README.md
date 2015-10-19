@@ -1,10 +1,17 @@
 ### Ucloud Python SDK and Command-Line Tool
 
+This project got 1st prize in Ucloud.cn API contest 2015.
+
 UcloudClient is a python sdk and a command-line client for Ucloud that brings
 the command set for Uhost, Unet, Umon APIs together in a single shell with a
 uniform command structure.
 welcome to contribute to this tools.		
 feel free to contact me if you find any bugs or have good advices.
+
+本项目获得 Ucloud.cn 基于全新API开发大赛一等奖
+比赛官网:http://www.ucloud.cn/sdk
+Ucloud.cn上海优刻得信息科技有限公司
+2015.05
 
 #### 一、设计理念
 这个项目包含python sdk 和 命令行工具,覆盖了UHOST,UNET,UMON这三大资源管理,以及UDISK两个API.SDK设计上也是按前面三大资源来做区分.
@@ -292,5 +299,5 @@ Apache License Version 2.0
 2. V0.1.8 修复命令行下绝大部分bug
 3. V0.1.9 修复查询单条与多条，现在分开为list 和 get
 4. V0.2.0 增加udisk的操作
-
+5. V0.2.1 更新说明文档
 

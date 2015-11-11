@@ -8,4 +8,5 @@ ucloudclient.egg-info
 .venv/
 uclient_test.py
 .idea/
+.tox/
 

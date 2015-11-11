@@ -273,7 +273,7 @@ output:
 #### 三 测试:
 
 已经完成shell,client,HTTPClient的unit test.主要使用了testtools,mock,fixtures等第三方模块.
-依赖请查看teset-requirements.txt.
+依赖请查看test-requirements.txt.
 
 #### 四 贡献：
 由于时间仓促，未能将Ucloud官方提供的接口全部覆盖，只覆盖了比赛要求中的三种资源，有兴趣的同学可以接着完善。
@@ -300,4 +300,5 @@ Apache License Version 2.0
 3. V0.1.9 修复查询单条与多条，现在分开为list 和 get
 4. V0.2.0 增加udisk的操作
 5. V0.2.1 更新说明文档
+6. V0.2.4 增加tox配置为测试管理工具
 

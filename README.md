@@ -5,7 +5,7 @@ This project got 1st prize in Ucloud.cn API contest 2015.
 UcloudClient is a python sdk and a command-line client for Ucloud that brings
 the command set for Uhost, Unet, Umon APIs together in a single shell with a
 uniform command structure.
-welcome to contribute to this tools.		
+welcome to contribute to this tools.
 feel free to contact me if you find any bugs or have good advices.
 
 本项目获得 Ucloud.cn 基于全新API开发大赛一等奖
@@ -63,6 +63,7 @@ Ucloud.cn上海优刻得信息科技有限公司
     PrettyTable>=0.7,<0.8
     six>=1.9.0
 软件链接：[https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
+[Launchpad](https://launchpad.net/python-ucloudclient)
 
 ##### 2.1 直接通过pip(或者easy_install)安装：
 
@@ -275,9 +276,10 @@ output:
 已经完成shell,client,HTTPClient的unit test.主要使用了testtools,mock,fixtures等第三方模块.
 依赖请查看test-requirements.txt.
 
-#### 四 贡献：
+#### 四 贡献与BUG：
 由于时间仓促，未能将Ucloud官方提供的接口全部覆盖，只覆盖了比赛要求中的三种资源，有兴趣的同学可以接着完善。
 代码遵守PEP8风格。
+如果发现BUG,欢迎在[launchpad](https://launchpad.net/python-ucloudclient)上面提交.
 
 ##### 4.1 SDK中增加api接口
 可以在目录“api”下面增加相应的资源管理模块，具体实现请参考现在已在的资源，

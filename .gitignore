@@ -9,4 +9,4 @@ ucloudclient.egg-info
 uclient_test.py
 .idea/
 .tox/
-
+.cache/

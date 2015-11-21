@@ -8,10 +8,14 @@ uniform command structure.
 welcome to contribute to this tools.
 feel free to contact me if you find any bugs or have good advices.
 
+Pypi link：[https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)  
+Project manage [Launchpad](https://launchpad.net/python-ucloudclient)
+
 本项目获得 Ucloud.cn 基于全新API开发大赛一等奖
 比赛官网:http://www.ucloud.cn/sdk
 Ucloud.cn上海优刻得信息科技有限公司
 2015.05
+
 
 #### 一、设计理念
 这个项目包含python sdk 和 命令行工具,覆盖了UHOST,UNET,UMON这三大资源管理,以及UDISK两个API.SDK设计上也是按前面三大资源来做区分.
@@ -62,9 +66,6 @@ Ucloud.cn上海优刻得信息科技有限公司
 
     PrettyTable>=0.7,<0.8
     six>=1.9.0
-
-软件链接：[https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
-开发管理 [Launchpad](https://launchpad.net/python-ucloudclient)
 
 ##### 2.1 直接通过pip(或者easy_install)安装：
 

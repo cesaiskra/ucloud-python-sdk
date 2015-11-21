@@ -303,4 +303,5 @@ Apache License Version 2.0
 4. V0.2.0 增加udisk的操作
 5. V0.2.1 更新说明文档
 6. V0.2.4 增加tox配置为测试管理工具
+7. V0.2.5 增加Launchpad 作为开发生命周期管理.
 

@@ -62,8 +62,9 @@ Ucloud.cn上海优刻得信息科技有限公司
 
     PrettyTable>=0.7,<0.8
     six>=1.9.0
+
 软件链接：[https://pypi.python.org/pypi/ucloudclient](https://pypi.python.org/pypi/ucloudclient)
-[Launchpad](https://launchpad.net/python-ucloudclient)
+开发管理 [Launchpad](https://launchpad.net/python-ucloudclient)
 
 ##### 2.1 直接通过pip(或者easy_install)安装：
 
